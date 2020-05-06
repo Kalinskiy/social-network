@@ -1,0 +1,41 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+
+}
+
+.dialogsItems {
+    padding: 10px;
+
+
+}
+.dialogsItems a{
+    text-decoration: none;
+    color:#4682B4;
+    display: block;
+    transition: width 2s, background-color 1s, height 4s; /* плаыный переход*/
+
+}
+.dialogsItems a:hover {
+    color:white;
+    background-color: #4682B4;
+
+
+}
+ 
+
+.dialogsItems .active {
+    color:black;
+
+}
+
+
+
+
+.messages {
+    padding: 10px;
+}
+
+.message {
+
+}

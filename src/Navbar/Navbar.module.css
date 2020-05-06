@@ -1,0 +1,29 @@
+.nav {
+    grid-area: n;
+    background-color: inherit;
+    padding: 20px 0;
+
+}
+.item {
+    margin-top:10px;
+}
+.item a {
+    color: #4682B4;
+    font-size: 20px;
+    display: block;
+    text-decoration: none;
+}
+
+.item a.activeLink {
+    color: #0f1e3d;
+
+    border-top:1px solid #c5d4e2;
+    border-bottom: 1px solid #c5d4e2;
+
+}
+.item a:hover {
+    background-color: #4682B4;
+    color:white;
+    cursor: pointer;
+    transition: width 2s, background-color 1s, height 4s; /* плаыный переход*/
+}

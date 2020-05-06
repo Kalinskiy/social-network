@@ -1,0 +1,13 @@
+
+.ava img {
+    width: 120px;
+    padding: 20px;
+}
+.mainPicture img{
+     width:1000px;
+    opacity: 0.8;
+}
+
+.desciptionBlock {
+    padding: 0  20px;
+}
