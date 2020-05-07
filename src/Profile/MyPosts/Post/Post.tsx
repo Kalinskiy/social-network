@@ -4,6 +4,7 @@ import s from './Post.module.css';
 
 
 type PostType = {
+    id:number
     message: string
     like: string
 }
