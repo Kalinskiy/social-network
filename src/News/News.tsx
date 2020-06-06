@@ -1,13 +1,16 @@
 import React from "react";
 import s from './News.module.css';
 
-type NewsType = {
-    name:any
+
+
+type PropsType = {
+
 }
-const News =(props:NewsType)=>{
+
+const News =(props:PropsType)=>{
     return(
         <div>
-            News
+        News
         </div>
     )
 }

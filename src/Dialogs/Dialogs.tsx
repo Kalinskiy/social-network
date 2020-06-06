@@ -3,46 +3,59 @@ import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {MessageType} from './Message/Message'
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../redux/state";
 
 
-
-
-type DialogsItemsType = {
+export type DialogsItemsType = {
     id: number
     name: string
 }
-const Dialogs = (props: DialogsItemsType) => {
-    let dialogsData: Array<DialogsItemsType> = [
-        {id: 1, name: 'Dimych'},
-        {id: 2, name: 'Sasha'},
-        {id: 3, name: 'Andrey'},
-        {id: 4, name: 'Sveta'},
-        {id: 5, name: 'Victor'},
-        {id: 6, name: 'Valera'}
-    ]
-    let dialogsElements = dialogsData.map((d) =>
-        <DialogItem name={d.name} id={d.id}/>);
+export type IProps = {
+    dialogs: Array<DialogsItemsType>
+    message: Array<MessageType>
+    newMessageBody: string
+}
+export type PropsDialogs = {
+    store: any;
+    state: IProps
+}
+export const Dialogs = (props: PropsDialogs) => {
+    let state = props.store.getState().dialogsPage;
 
-    let messageData: Array<MessageType> = [
-        {id: 1, message: 'Hello'},
-        {id: 2, message: 'How are you doing?'},
-        {id: 3, message: 'YO YO YO'},
-        {id: 4, message: 'here is too'},
-        {id: 5, message: 'Here is something else'},
-        {id: 6, message: 'Yo'},
-    ]
-    let messagesElements = messageData.map(m => <Message message={m.message} id={m.id}/>);
+
+    let dialogsElements =  state.dialogs.map((d) => <DialogItem name={d.name} id={d.id}/>);
+    let messagesElements =  state.message.map(m => <Message message={m.message} id={m.id}/>);
+
+    let newMessageBody =  state.newMessageBody;
+    let onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator);
+    };
+    let onNewMessageChange = (e:any) => {
+        let body = e.target.value;
+         props.store.dispatch(updateNewMessageBodyCreator(body));
+    };
 
     return (
+
         <div className={s.dialogs}>
+
             <div className={s.dialogsItems}>
-                {dialogsElements}
+                {dialogsElements} {/*рефакторинг через метод массива map*/}
 
             </div>
             <div className={s.messages}>
-                {messagesElements} {/*рефакторинг через метод массива map*/}
 
+                <div>{messagesElements} </div>
+                {/*рефакторинг через метод массива map*/}
+                <div>
+                    <div><textarea
+                        onChange={onNewMessageChange}
+                        value={newMessageBody}
+                        placeholder={'enter your message here...'}
+                    ></textarea> </div>
+                    <div><button onClick={onSendMessageClick}>Send</button></div>
 
+                </div>
             </div>
         </div>
     )

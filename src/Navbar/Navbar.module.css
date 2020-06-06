@@ -23,6 +23,7 @@
     border-top:1px solid #c5d4e2;
     border-bottom: 1px solid #c5d4e2;
 
+
 }
 .item a:hover {
     background-color: #4682B4;
@@ -30,3 +31,4 @@
     cursor: pointer;
     transition: width 2s, background-color 1s, height 4s; /* плаыный переход*/
 }
+
