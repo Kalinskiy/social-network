@@ -1,8 +1,6 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostActionCreator, updateNewPostTextCreator} from '../../redux/state';
-
 
 
 export type IPost = {
@@ -12,28 +10,33 @@ export type IPost = {
 }
 
 export type PostsType = {
-    posts: Array<IPost>
-    newPostText: string
-    dispatch: any
+    updateNewPostText:any
+    addPost:()=>void
+    posts:Array<IPost>
+    newPostText:string
+
 
 
 }
 
 const MyPosts = (props: PostsType) => {
 
-    let postsElement = props.posts.map((p: IPost) => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+
+    let postsElement =  props.posts.map((p) => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
     let newPostElement: any = React.createRef();
 
-    let addPost = () => {
+    let onAddPost = () => {
+         props.addPost()
        // let text = newPostElement.current.value;
-        props.dispatch(addPostActionCreator());
+       // props.dispatch(addPostActionCreator());
 
     }
     let onPostChange = () => {
         let text: string = newPostElement.current.value;
+        props.updateNewPostText();
        // let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        let action = updateNewPostTextCreator(text);
-        props.dispatch(action);
+      // let action = updateNewPostTextCreator(text);
+        //props.dispatch(action);
 
     }
 
@@ -48,7 +51,7 @@ const MyPosts = (props: PostsType) => {
                         onChange={onPostChange}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add Post</button>
+                    <button onClick={onAddPost}>Add Post</button>
                 </div>
             </div>
 

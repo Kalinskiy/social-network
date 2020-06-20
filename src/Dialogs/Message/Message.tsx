@@ -4,7 +4,9 @@ import s from '../Dialogs.module.css';
 
 export type MessageType = {
     message: string
-    id: number
+
+
+
 }
 const Message = (props: MessageType) => {
 

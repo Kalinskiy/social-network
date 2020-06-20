@@ -10,11 +10,11 @@ import News from "./News/News";
 import Music from "./Music/Music";
 import Settings from "./Settings/Settings";
 import Profile from "./Profile/Profile";
-import store from "./redux/state";
+import DialogsContainer from "./Dialogs/DialogsContainer";
 
 
 const App = (props: any) => {
-    debugger
+
 
 
     return (
@@ -25,17 +25,10 @@ const App = (props: any) => {
                 <div className='app-wrapper-content'>
 
                     <Route path='/profile'
-                           render={() => <Profile
-                               profilePage={props.state.profilePage}
-                               dispatch={props.dispatch}
-                               store={props.store}
-
-                           />}
-                    />
+                           render={() => <Profile/>}/>
                     <Route path='/dialogs'
-                           render={() => <Dialogs
-                               store={props.store}
-                           />}/>
+                           render={() => <DialogsContainer/>}/>
+
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
