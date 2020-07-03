@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './Post.module.css';
 
 
@@ -6,22 +6,27 @@ import s from './Post.module.css';
 type PostType = {
     id:number
     message: string
-    likesCount: string
+    likesCount: number
+    addLike: (id: number) => void
 }
 
 
 const Post = (props: PostType) => {
+
     console.log(props.message)
     return (
 
         <div className={s.item}>
             <img
-                src="https://img.pngio.com/png-avatar-108-images-in-collection-page-3-png-avatar-300_300.png"/>
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNsyykYTyoBVPpuwQMZ8YVcLVNHzvDwd9ixA&usqp=CAU"/>
             {props.message}
 
             <div>
-                <span>like  </span>
+                <span   onClick={ () => props.addLike(props.id)} className={s.like}>♥
+
+                </span>
                 {props.likesCount}
+                {/*{props.likesCount}*/}
             </div>
         </div>
 

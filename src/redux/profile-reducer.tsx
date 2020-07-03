@@ -1,32 +1,54 @@
 import {newPostType} from "./store";
+import {IPost} from "../Profile/MyPosts/MyPosts";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_LIKE = 'ADD_LIKE';
 
-const profileReducer = (state: any = 'INITIAL-STATE', action: any) => {
+let initialState = {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 1},
+        {id: 2, message: 'It`s my first post', likesCount: 5},
+        {id: 3, message: 'Third one', likesCount: 9},
+    ],
+    newPostText: 'it-kamasutra.com'
+}
+
+
+const profileReducer = (state: any = initialState, action: any) => {
+
     switch (action.type) {
-
-        case ADD_POST:
+        case ADD_POST: {
             let newPost: newPostType = {
                 id: 5,
                 message: state.newPostText,
-                likesCount: '0',
-
+                likesCount: 0,
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
-
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-
-
-            return state;
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                stateCopy: ''
+            }
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newText,
+            }
+        }
+        case ADD_LIKE: {
+            return {
+                ...state,
+                posts: state.posts.map((i: IPost) => {
+                    return {...i, likesCount: i.id === action.payload.id ? i.likesCount + 1 : i.likesCount}
+                })
+            }
+        }
         default:
             return state;
     }
 }
-
+export const addLikeAC = (id: number) => ({type: ADD_LIKE, payload: {id}})
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostTextCreator = (text: string) =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text});

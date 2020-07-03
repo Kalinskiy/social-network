@@ -14,7 +14,7 @@ const ProfileInfo = () => {
             </div>
 
             <div className={s.ava}>
-                <img src="https://img.pngio.com/png-avatar-108-images-in-collection-page-3-png-avatar-300_300.png"
+                <img src="https://f1.pngfuel.com/png/969/988/965/glasses-background-fiverr-whiteboard-animation-marketing-video-games-explainer-video-eyewear-face-png-clip-art.png"
                 />
 
 

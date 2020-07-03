@@ -45,16 +45,20 @@ export type IProps = {
 //     )
 // }
 
-let mapStateToProps = (state:any) => {
+let mapStateToProps = (state: any) => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch:any) => {
+let mapDispatchToProps = (dispatch: any) => {
     return {
-        updateNewMessageBody:()=>{dispatch(sendMessageCreator())},
-        sendMessage: (body:any)=>{ dispatch(updateNewMessageBodyCreator(body))
-        }
+        sendMessage: () => {
+            dispatch(sendMessageCreator());
+        },
+        updateNewMessageBody: (body: any) => {
+            dispatch(updateNewMessageBodyCreator(body))
+        },
+
     }
 }
 

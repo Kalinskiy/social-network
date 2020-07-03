@@ -7,7 +7,7 @@ import dialogsReducer from "./dialogs-reducer";
 export type newPostType = {
     id: number,
     message: string,
-    likesCount: string,
+    likesCount: number,
 
 
 }

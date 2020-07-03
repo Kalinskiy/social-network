@@ -1,0 +1,14 @@
+.usersPhoto {
+    width:70px;
+}
+.selectedPage {
+    font-weight: bold;
+    margin:2px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.UnselectedPage{
+    margin:2px;
+    font-size: 20px;
+    cursor: pointer;
+}

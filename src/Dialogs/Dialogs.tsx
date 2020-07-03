@@ -10,7 +10,7 @@ export type DialogsItemsType = {
 }
 export type IProps = {
     dialogs: Array<DialogsItemsType>
-    message: Array<MessageType>
+    messages: Array<MessageType>
     newMessageBody: string
 
 
@@ -22,11 +22,11 @@ export type PropsDialogs = {
 
 
 }
-export const Dialogs = (props: any) => {
+export const Dialogs = (props: PropsDialogs) => {
     let state = props.dialogsPage;
 
-    let dialogsElements = state.dialogs.map((d: any) => <DialogItem name={d.name} id={d.id}/>);
-    let messagesElements = state.message.map((m: any) => <Message message={m.message}
+    let dialogsElements = state.dialogs.map((d:any) => <DialogItem name={d.name} id={d.id}/>);
+    let messagesElements = state.messages.map((m:any) => <Message message={m.message}
     />);
     let newMessageBody = state.newMessageBody;
 

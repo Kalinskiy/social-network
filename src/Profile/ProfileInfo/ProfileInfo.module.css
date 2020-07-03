@@ -1,7 +1,9 @@
 
 .ava img {
-    width: 120px;
+    width: 100px;
+    height: 100px;
     padding: 20px;
+    border-radius: 50%;
 }
 .mainPicture img{
      width:1000px;

@@ -15,4 +15,6 @@ const News =(props:PropsType)=>{
     )
 }
 
+
+
 export default News;

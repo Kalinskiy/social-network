@@ -6,12 +6,13 @@ import Post from "./Post/Post";
 export type IPost = {
     id: number
     message: string
-    likesCount: string
+    likesCount: number
 }
 
 export type PostsType = {
     updateNewPostText:any
     addPost:()=>void
+    addLike: ( id: number )=>void
     posts:Array<IPost>
     newPostText:string
 
@@ -19,21 +20,25 @@ export type PostsType = {
 
 }
 
+
+
 const MyPosts = (props: PostsType) => {
 
 
-    let postsElement =  props.posts.map((p) => <Post id={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElement =  props.posts.map((p) => <Post id={p.id} addLike={props.addLike} message={p.message} likesCount={p.likesCount}/>)
     let newPostElement: any = React.createRef();
 
     let onAddPost = () => {
          props.addPost()
+        props.updateNewPostText( '' )
        // let text = newPostElement.current.value;
        // props.dispatch(addPostActionCreator());
 
     }
     let onPostChange = () => {
         let text: string = newPostElement.current.value;
-        props.updateNewPostText();
+        props.updateNewPostText( text );
+
        // let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
       // let action = updateNewPostTextCreator(text);
         //props.dispatch(action);
@@ -64,5 +69,6 @@ const MyPosts = (props: PostsType) => {
 
     )
 }
+
 
 export default MyPosts;
