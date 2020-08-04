@@ -1,9 +1,20 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import Preloader from "../../components/common/preloader/Preloader";
+import userPhoto from "../../assets/images/user.png";
+
+type PropsType = {
+    profile: any
+}
+const ProfileInfo = (props: PropsType) => {
 
 
-const ProfileInfo = () => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
+
     return (
+
         <div>
 
             <div className={s.mainPicture}>
@@ -13,16 +24,21 @@ const ProfileInfo = () => {
 
             </div>
 
-            <div className={s.ava}>
-                <img src="https://f1.pngfuel.com/png/969/988/965/glasses-background-fiverr-whiteboard-animation-marketing-video-games-explainer-video-eyewear-face-png-clip-art.png"
-                />
+            <div className={s.desciptionBlock}>
+                <img className={s.ava} src={props.profile.photos.large}/>
+                <div>Job: {props.profile.lookingForAJob}</div>
+                <div>Description: {props.profile.lookingForAJobDescription}</div>
+                <div>FullName: {props.profile.fullName}</div>
+                <div>Contacts:
+                    <div>
+                        <div> github: {props.profile.contacts.github} </div>
+                        <div> VK: {props.profile.contacts.vk}</div>
+                        <div> facebook: {props.profile.contacts.facebook}</div>
+                        <div> instagram: {props.profile.contacts.instagram}</div>
+                    </div>
+                </div>
 
 
-            </div>
-            <div className={s.desciptionBlock}> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium
-                assumenda autem cum dolore est excepturi, exercitationem illo labore nam non odio officia possimus quae
-                repellendus unde voluptates. Asperiores eius facilis libero mollitia, nam placeat recusandae repellat
-                repellendus vel velit!
             </div>
 
         </div>

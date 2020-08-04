@@ -10,6 +10,7 @@ export type newPostType = {
     likesCount: number,
 
 
+
 }
 let store = {
     _state: {

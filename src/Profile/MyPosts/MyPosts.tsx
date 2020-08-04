@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './MyPosts.module.css';
-import Post from "./Post/Post";
+import Post from './Post/Post';
 
 
 export type IPost = {
@@ -20,12 +20,10 @@ export type PostsType = {
 
 }
 
-
-
 const MyPosts = (props: PostsType) => {
 
 
-    let postsElement =  props.posts.map((p) => <Post id={p.id} addLike={props.addLike} message={p.message} likesCount={p.likesCount}/>)
+    let postsElement =  props.posts.map((p) => <Post key={p.id} id={p.id} addLike={props.addLike} message={p.message} likesCount={p.likesCount}/>)
     let newPostElement: any = React.createRef();
 
     let onAddPost = () => {

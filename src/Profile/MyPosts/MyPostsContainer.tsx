@@ -1,7 +1,7 @@
 import React from 'react';
 import {addLikeAC, addPostActionCreator, updateNewPostTextCreator} from '../../redux/profile-reducer';
-import MyPosts from "./MyPosts";
-import {connect} from "react-redux";
+import MyPosts from './MyPosts';
+import {connect} from 'react-redux';
 
 
 export type IPost = {
@@ -19,7 +19,7 @@ export type PostsType = {
 //
 //     // @ts-ignore
 //     return (
-//         <StoreContext.Consumer>
+//         <StoreContext.Consumer> //CONTEXT API
 //             {(store: any) => {
 //                 let state = store.getState();
 //                 let addPost = () => {
