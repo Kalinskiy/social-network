@@ -1,17 +1,32 @@
 .header {
     grid-area: h;
-    background-color: #B0C4DE;
+    background-color: #b0c4de;
 
 
 }
+
 .header img {
-    width:50px;
-    margin:15px;
+    width: 50px;
+    margin: 15px;
 }
-.loginBlock{
-    float:right
-}
-.loginBlock a{
-    color:white;
+
+.loginBlock {
+
+    float: right;
+    margin: 15px;
+    cursor: pointer;
     font-size: 20px;
+    color: white;
+    font-weight: 500;
+    display: block;
+
+}
+
+.loginBlock a {
+
+    margin-left: 10px;
+}
+.loginBlock:hover{
+    color: rgba(23, 37, 80, 0.87);
+    transition: .5s color;
 }

@@ -25,6 +25,7 @@ const ProfileInfo = (props: PropsType) => {
             </div>
 
             <div className={s.desciptionBlock}>
+        
                 <img className={s.ava} src={props.profile.photos.large}/>
                 <div>Job: {props.profile.lookingForAJob}</div>
                 <div>Description: {props.profile.lookingForAJobDescription}</div>

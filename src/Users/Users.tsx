@@ -39,11 +39,6 @@ let Users = (props: UsersTypeProps) => {
         pages.push(i);
     }
 
-
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
     return <>
 
         <div>
@@ -71,31 +66,10 @@ let Users = (props: UsersTypeProps) => {
                         {u.followed
 
                             ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.toggleFollowingProgress(true, u.id)
-
-                                usersAPI.unfollow(u.id)
-                                    .then((response: any) => {
-                                        if (response.data.resultCode == 0) {
-                                            props.unfollow(u.id)
-                                        }
-                                        props.toggleFollowingProgress(false, u.id)
-                                    });
-
-
+                                props.unfollow(u.id)
                             }}>Unfollow</button>
                             : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                props.toggleFollowingProgress(true, u.id)
-
-                                usersAPI.follow(u.id)
-                                    .then((response: any) => {
-                                        if (response.data.resultCode == 0) {
-                                            props.follow(u.id)
-                                        }
-                                        props.toggleFollowingProgress(false, u.id)
-
-                                    });
-
-
+                                props.follow(u.id)
                             }}>Follow</button>
                         }
 

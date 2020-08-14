@@ -1,13 +1,11 @@
 import React from 'react';
 
 import './App.css';
-import Header from "./Header/Header";
 import Navbar from "./Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
 import News from "./News/News";
 import Music from "./Music/Music";
 import Settings from "./Settings/Settings";
-import Profile from "./Profile/Profile";
 import DialogsContainer from "./Dialogs/DialogsContainer";
 import UsersContainer from "./Users/UsersContainer";
 import ProfileContainer from "./Profile/ProfileContainer";

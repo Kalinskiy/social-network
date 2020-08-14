@@ -1,20 +1,9 @@
-import React from "react";
-import s from './News.module.css';
+import React from 'react';
 
 
-
-type PropsType = {
-
-}
-
-const News =(props:PropsType)=>{
-    return(
-        <div>
+const News = (props:any)=>{
+    return  <>
         News
-        </div>
-    )
+        </>
 }
-
-
-
 export default News;
