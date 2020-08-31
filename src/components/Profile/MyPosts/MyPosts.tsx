@@ -22,7 +22,6 @@ export type PostsType = {
 
 const MyPosts = (props: PostsType) => {
 
-
     let postsElement =  props.posts.map((p) => <Post key={p.id} id={p.id} addLike={props.addLike} message={p.message} likesCount={p.likesCount}/>)
     let newPostElement: any = React.createRef();
 

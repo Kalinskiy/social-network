@@ -1,6 +1,23 @@
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
+import {DialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
+import {MessageType} from "../components/Dialogs/Message/Message";
+
+
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
+type dialogsStateType = {
+    dialogs: Array<DialogItemType>,
+    messages: Array<MessageType>
+
+}
+export type sendMessageCreatorType ={
+    newMessageBody:string
+    type:'SEND-MESSAGE'
+}
+export type updateNewMessageBodyCreatorType ={
+    type:'UPDATE-NEW-MESSAGE-BODY'
+    body:string
+}
+type ActionsType =  sendMessageCreatorType | updateNewMessageBodyCreatorType
 
 let initialState = {
     dialogs: [
@@ -16,26 +33,24 @@ let initialState = {
         {id: 2, message: 'how is your it-kamasutra'},
         {id: 3, message: 'yo'},
         {id: 4, message: 'yo'},
+        {id: 5, message: 'yo'}, {id: 3, message: 'yo'},
+        {id: 4, message: 'yo'},
         {id: 5, message: 'yo'},
     ],
-    newMessageBody: ''
+
 };
 
-const dialogsReducer = (state: any = initialState, action: any) => {
+
+const dialogsReducer = (state: dialogsStateType = initialState, action: ActionsType):dialogsStateType => {
 
 
     switch (action.type) {
-        case  UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
+
 
         case SEND_MESSAGE:
-            let body = state.newMessageBody;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, {id: 6, message: body}]
             };
         default:
@@ -45,9 +60,8 @@ const dialogsReducer = (state: any = initialState, action: any) => {
 }
 
 
-export const sendMessageCreator = () => ({type: SEND_MESSAGE});
-export const updateNewMessageBodyCreator = (body: string) =>
-    ({type: UPDATE_NEW_MESSAGE_BODY, body: body})
+export const sendMessageCreator = (newMessageBody: string):sendMessageCreatorType => ({type: SEND_MESSAGE, newMessageBody});
+
 
 
 export default dialogsReducer;

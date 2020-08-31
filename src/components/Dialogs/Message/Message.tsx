@@ -3,8 +3,8 @@ import s from '../Dialogs.module.css';
 
 
 export type MessageType = {
+    id?: number
     message: string
-
 
 
 }
@@ -17,8 +17,11 @@ const Message = (props: MessageType) => {
         alert(text);
     }
     return (
-        <div className={s.message}><textarea ref={newMessageElement}>{props.message}</textarea>
-            <button onClick={sendMessage}>Send</button>
+        <div className={s.message}>
+            <span  ref={newMessageElement}>{props.message}</span>
+
+
+
 
         </div>
     )

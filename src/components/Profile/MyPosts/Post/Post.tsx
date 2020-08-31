@@ -3,17 +3,18 @@ import s from './Post.module.css';
 
 
 
-type PostType = {
+export type PostType = {
     id:number
     message: string
     likesCount: number
-    addLike: (id: number) => void
+    addLike?: (id: number) => void
 }
 
 
 const Post = (props: PostType) => {
 
-    console.log(props.message)
+
+
     return (
 
         <div className={s.item}>
@@ -22,7 +23,9 @@ const Post = (props: PostType) => {
             {props.message}
 
             <div>
-                <span   onClick={ () => props.addLike(props.id)} className={s.like}>♥
+                <span   onClick={ () =>
+                    // @ts-ignore
+                    props.addLike(props.id)} className={s.like}>♥
 
                 </span>
                 {props.likesCount}

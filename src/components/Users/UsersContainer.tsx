@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect, ConnectedProps} from 'react-redux';
-import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow} from "../redux/users-reducer";
+import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow} from "../../redux/users-reducer";
 import Users, {UserType} from "./Users";
-import Preloader from "../components/common/preloader/Preloader";
-import {AppStoreType} from "../redux/redux-store";
+import Preloader from "../common/preloader/Preloader";
+import {AppStoreType} from "../../redux/redux-store";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import { compose } from 'redux';
 
 
 type MapStatePropsType = {
@@ -25,7 +27,7 @@ type MapDispatchPropsType = {
     toggleFollowingProgress: (isFetching: boolean) => void
 }
 
-class UsersContainer extends React.Component<AllProps> {
+class UsersContainer extends React.Component<any> {
 
     componentDidMount(): void {
         this.props.getUsers(this.props.currentPage,this.props.pageSize );
@@ -74,31 +76,6 @@ const mapStateToProps = (state: AppStoreType) => {
     }
 }
 
-// let mapDispatchToProps = (dispatch: Function) => {
-//     return {
-//         follow: (userId: number) => {
-//             dispatch(follow(userId))
-//         },
-//         unfollow: (userId: number) => {
-//             dispatch(unfollow(userId))
-//         },
-//         setUsers: (users: any) => {
-//             dispatch(setUsers(users))
-//         },
-//         setCurrentPage: (currentPage: number) => {
-//             dispatch(setCurrentPage(currentPage))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCount(totalCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetching(isFetching))
-//         },
-//         toggleFollowingProgress:(isFetching:boolean, userId:number)=>{
-//             dispatch(toggleFollowingProgress(isFetching, userId))
-//         }
-//     }
-// }
 
 let mapDispatchToProps = {
     follow,
@@ -110,10 +87,11 @@ let mapDispatchToProps = {
 
 }
 
-type PropsRedux = ConnectedProps<typeof connector>
-const connector = connect(mapStateToProps, mapDispatchToProps)
 
 
-type AllProps = PropsRedux
 
-export default connector(UsersContainer);
+export default compose<React.ComponentType>(
+    WithAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps)
+
+)(UsersContainer)

@@ -12,7 +12,7 @@ export type newPostType = {
 
 
 }
-let store = {
+let store:any = {
     _state: {
         profilePage: {
             posts: [
@@ -53,7 +53,7 @@ let store = {
     subscribe(observer: any) {
         this._callSubscriber = observer;
     },
-    dispatch(action: any) {//{type 'ADD-POST'}
+    dispatch(action: any) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);

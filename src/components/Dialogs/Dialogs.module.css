@@ -45,3 +45,6 @@
 
     font-size: 18px;
 }
+.message:nth-child(odd ){
+    background-color: white;
+}
