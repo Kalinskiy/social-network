@@ -1,5 +1,11 @@
 import React from "react";
-import  {reduxForm,Field} from "redux-form";
+import {reduxForm, Field} from "redux-form";
+import {Input} from "../common/FormsControls/FormControls";
+import {required} from "../../utilities/validators/validators";
+import {connect} from "react-redux";
+import {login, logout} from "../../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
+import common from '../common/FormsControls/FormControls.module.css'
 
 const LoginForm = (props: any) => {
 
@@ -7,14 +13,34 @@ const LoginForm = (props: any) => {
 
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'}  name={'login'} component={'input'}/>
+                <Field
+                    component={Input}
+                    placeholder={'Email'}
+                    name={'email'}
+                    validate={[required]}
+
+                />
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={'input'}/>
+                <Field
+                    component={Input}
+                    placeholder={'Password'}
+                    name={'password'}
+                    validate={[required]}
+                    type={'password'}
+
+                />
             </div>
             <div>
-                <Field type={'checkbox'} name={'checkbox'} component={'input'}/> remember me
+                <Field
+                    component={Input}
+                    type={'checkbox'}
+                    name={'rememberMe'}
+
+
+                /> remember me
             </div>
+            {props.error?<div className={common.formSummaryError}>{props.error}</div>:''}
             <div>
                 <button>Login</button>
             </div>
@@ -25,22 +51,24 @@ const LoginForm = (props: any) => {
 }
 
 
-// @ts-ignore
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 
 const Login = (props: any) => {
 
-// all numbers more than 22
-
-
-    const onSubmit = (formdata:any)=>{
-        console.log(formdata);
+    const onSubmit = (formdata: any) => {
+        props.login(formdata.email, formdata.password, formdata.rememberMe);
     }
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
+
     return <div>
         <h1>Login</h1>
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
-
-export default Login
+const mapStateToProps = (state: any) => ({
+    isAuth: state.auth.isAuth
+})
+export default connect(mapStateToProps, {login, logout})(Login)

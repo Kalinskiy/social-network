@@ -4,10 +4,8 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStoreType} from "../../redux/redux-store";
 import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
-import {withRouter, Redirect} from 'react-router-dom';
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import Dialogs from "../Dialogs/Dialogs";
-import { compose } from 'redux';
+import {withRouter} from 'react-router-dom';
+import {compose} from 'redux';
 
 
 export type PropsType = {
@@ -26,7 +24,10 @@ class ProfileContainer extends React.Component<any> {
 
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = 8823;
+           userId = this.props.authorizedUserId;
+           if(!userId){
+               this.props.history.push('/login')
+           }
         }
         this.props.getUserProfile(userId);
         this.props.getStatus(userId);
@@ -35,7 +36,11 @@ class ProfileContainer extends React.Component<any> {
     render() {
 
         return (
-            < Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            < Profile
+                {...this.props}
+                profile={this.props.profile}
+                status={this.props.status}
+                updateStatus={this.props.updateStatus}/>
 
         )
     }
@@ -44,13 +49,14 @@ class ProfileContainer extends React.Component<any> {
 const mapStateToProps = (state: AppStoreType) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 
 
 })
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile,getStatus, updateStatus}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     // WithAuthRedirect,
 )(ProfileContainer)

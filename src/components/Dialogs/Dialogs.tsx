@@ -1,10 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 
 import {Redirect} from "react-router-dom";
-import  {Field,reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
+import AddMessageForm from "./Message/AddMessageForm/AddMessageForm";
 
 
 export const Dialogs = (props: any) => {
@@ -37,23 +38,12 @@ export const Dialogs = (props: any) => {
 
                 <div>{messagesElements} </div>
                 {/*рефакторинг через метод массива map*/}
-                <AddMessageFormRedux onSubmit={addNewMessage}/>         {/*форма отправки сообщения через redux-form*/}
+                <AddMessageForm  onSubmit={addNewMessage}/>         {/*форма отправки сообщения через redux-form*/}
             </div>
         </div>
     )
 }
 
-const AddMessageForm = (props: any) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div><Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your message here'}/></div>
-            <div>
-                <button>Send</button>
-            </div>
 
-        </form>
-    )
-}
 
-const AddMessageFormRedux = reduxForm({form:'dialogAddMessageForm'})(AddMessageForm)
 export default Dialogs;

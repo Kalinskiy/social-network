@@ -1,11 +1,11 @@
 import {newPostType} from "./store";
 import {IPost} from "../components/Profile/MyPosts/MyPosts";
 import {profileAPI, usersAPI} from "../api/api";
-import {AppStoreType} from "./redux-store";
+
 import {PostType} from "../components/Profile/MyPosts/Post/Post";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 const ADD_LIKE = 'ADD_LIKE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
@@ -13,7 +13,6 @@ const SET_STATUS = 'SET_STATUS'
 
 type profileStateType = {
     posts: Array<PostType>
-    newPostText: string
     profile: null
     status:string
 
@@ -25,7 +24,7 @@ let initialState:profileStateType = {
         {id: 2, message: 'It`s my first post', likesCount: 5},
         {id: 3, message: 'Third one', likesCount: 9},
     ],
-    newPostText: 'it-kamasutra.com',
+
     profile: null,
     status:''
 }
@@ -33,6 +32,7 @@ let initialState:profileStateType = {
 
 export type AddPostType = {
     type: 'ADD-POST',
+    newPostText:string
 }
 export type AddLikeType = {
     type: 'ADD_LIKE',
@@ -62,7 +62,7 @@ const profileReducer = (state: profileStateType = initialState, action: ActionTy
         case ADD_POST: {
             let newPost: newPostType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0,
             };
             return {
@@ -70,12 +70,7 @@ const profileReducer = (state: profileStateType = initialState, action: ActionTy
                 posts: [...state.posts, newPost],
 
             }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText,
-            }
+
         }
         case ADD_LIKE: {
             return {
@@ -104,9 +99,8 @@ const profileReducer = (state: profileStateType = initialState, action: ActionTy
 
 
 export const addLikeAC = (id: number) => ({type: ADD_LIKE, payload: {id}})
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const updateNewPostTextCreator = (text: string) =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export const  addPostActionCreator = (newPostText:string) => ({type: ADD_POST, newPostText});
+
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status: string) => ({type: SET_STATUS, status});
 export const getUserProfile = (userId: any) => (dispatch: any) => {

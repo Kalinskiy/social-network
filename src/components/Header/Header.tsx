@@ -6,14 +6,14 @@ const Header = (props: any) => {
 
 
 
-    const divLog = props.userId + ' ' + props.login
+    const logInfo = 'ID ' +props.userId + ' ' + props.login
     return (
         <header className={s.header}>
             <img
                 src="https://upload.wikimedia.org/wikipedia/commons/b/be/Lineage_OS_Logo.png"
             />
             <div className={s.loginBlock}>
-                { props.isAuth ?`ID: ` + divLog  : <NavLink to={'/login'}>Login</NavLink> }
+                { props.isAuth ? <div>{logInfo} - <button onClick={props.logout}>Log out</button></div>: <NavLink to={'/login'}>Login</NavLink> }
             </div>
         </header>
     )
