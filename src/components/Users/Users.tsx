@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 
 export type UserType = {
@@ -32,6 +31,7 @@ export type UsersTypeProps = {
 }
 
 let Users = (props: UsersTypeProps) => {
+    console.log(props)
     // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pagesCount = 30
     let pages = [];
@@ -55,6 +55,7 @@ let Users = (props: UsersTypeProps) => {
 
         {
             props.users.map((u: any) => <div key={u.id}>
+
                 <span>
                     <div>
                         <NavLink to={`/profile/` + u.id}>

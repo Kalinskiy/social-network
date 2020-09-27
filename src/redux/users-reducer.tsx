@@ -17,6 +17,8 @@ let initialState = {
     isFetching: false,
     followingInProgress: []
 }
+//----------------------------------------------------------------------------------------------------------------------
+//Types
 type UsersStateType = {
     users: Array<UserType>
     pageSize: number
@@ -60,7 +62,8 @@ export type ToggleIsFollowingProgressType = {
 type ActionType = FollowType | UnfollowType | SetUsersType | SetCurrentPageType | SetTotalUsersCountType
     | ToggleIsFetchingType | ToggleIsFollowingProgressType
 
-
+//----------------------------------------------------------------------------------------------------------------------
+//Reducer
 const usersReducer = (state: UsersStateType = initialState, action: ActionType): UsersStateType => {
 
     switch (action.type) {
@@ -112,7 +115,8 @@ const usersReducer = (state: UsersStateType = initialState, action: ActionType):
             return state;
     }
 }
-
+//----------------------------------------------------------------------------------------------------------------------
+//Actions
 export const followSuccess = (userId: number) => ({type: FOLLOW, userId});
 export const unfollowSuccess = (userId: number) => ({type: UNFOLLOW, userId});
 export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users});
@@ -127,14 +131,14 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
     isFetching,
     userId
 });
-    
+
+//----------------------------------------------------------------------------------------------------------------------
+//Thunks
 export const requestUsers = (page: number, pageSize: number) => {
     return (dispatch: any) => {
         dispatch(toggleIsFetching(true));
         dispatch(setCurrentPage(page));
-
         usersAPI.getUsers(page, pageSize).then((data: any) => {
-
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount))

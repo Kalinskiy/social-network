@@ -1,8 +1,15 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'SET_USER_DATA';
-
+const SET_USER_DATA = 'auth/SET_USER_DATA';
+let initialState = {
+    userId: null,
+    email: null,
+    login: null,
+    isAuth: false
+}
+//----------------------------------------------------------------------------------------------------------------------
+//Types
 type authStateType = {
     userId: null | number
     email: null | string
@@ -10,22 +17,18 @@ type authStateType = {
     isAuth: boolean
 }
 
-let initialState = {
-    userId: null,
-    email: null,
-    login: null,
-    isAuth: false
-}
 export type SetUserDataType = {
-    type: 'SET_USER_DATA'
+    type: 'auth/SET_USER_DATA'
     payload: {
         userId: number | null,
         email: string | null,
         login: string | null,
-        isAuth:boolean
+        isAuth: boolean
     },
 }
 type ActionType = SetUserDataType
+//----------------------------------------------------------------------------------------------------------------------
+//Reducer
 const authReducer = (state: authStateType = initialState, action: ActionType): authStateType => {
 
     switch (action.type) {
@@ -42,51 +45,39 @@ const authReducer = (state: authStateType = initialState, action: ActionType): a
     }
 }
 
-
-export const setAuthUserData = (userId: number | null , email: string | null, login: string | null, isAuth:boolean) => ({
+//----------------------------------------------------------------------------------------------------------------------
+//Actions
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
     payload: {userId, email, login, isAuth}
 });
 
-export const getAuthUserData = () => (dispatch: any) => {
-    return authAPI.me()
-        .then((response: any) => {
-
-            if (response.data.resultCode === 0) {
-
-                let {email, id, login, isAuth} = response.data.data;
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        });
-
+//----------------------------------------------------------------------------------------------------------------------
+//Thunks
+export const getAuthUserData = () => async (dispatch: any) => {
+    const response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let {email, id, login} = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 }
-export const login = (email:string, password:string, rememberMe:boolean) => (dispatch: any) => {
-
-
-
-    authAPI.login(email, password, rememberMe)
-        .then((response: any) => {
-
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+    const response = await authAPI.login(email, password, rememberMe)
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
-            }
-            else {
-                let message = response.data.messages.length>0 ? response.data.messages[0] : 'email or password is not valid'
-                dispatch(stopSubmit('login',{_error: message})) //диспатчим AC который пришел из redux-form  библиотеки
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'email or password is not valid'
+                dispatch(stopSubmit('login', {_error: message})) //диспатчим AC который пришел из redux-form  библиотеки
                 //1 параметр - название формы
             }
-        });
+
 
 }
-export const logout = (email:string, password:string, rememberMe:boolean) => (dispatch: any) => {
-    authAPI.logout()
-        .then((response: any) => {
-
+export const logout = (email: string, password: string, rememberMe: boolean) => async(dispatch: any) => {
+    const response =await authAPI.logout()
             if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(null, null, null, false))
             }
-        });
-
 }
 
 export default authReducer;

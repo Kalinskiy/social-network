@@ -40,7 +40,7 @@ export const getNews = () => {
             newsAPI.getnews()
                 .then((data) => {
 
-debugger
+
                         dispatch(setNews(data.data.articles));
 
                 })

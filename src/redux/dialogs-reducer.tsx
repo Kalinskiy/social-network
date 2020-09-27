@@ -3,22 +3,6 @@ import {MessageType} from "../components/Dialogs/Message/Message";
 
 
 const SEND_MESSAGE = 'SEND-MESSAGE';
-
-type dialogsStateType = {
-    dialogs: Array<DialogItemType>,
-    messages: Array<MessageType>
-
-}
-export type sendMessageCreatorType ={
-    newMessageBody:string
-    type:'SEND-MESSAGE'
-}
-export type updateNewMessageBodyCreatorType ={
-    type:'UPDATE-NEW-MESSAGE-BODY'
-    body:string
-}
-type ActionsType =  sendMessageCreatorType | updateNewMessageBodyCreatorType
-
 let initialState = {
     dialogs: [
         {id: 1, name: 'Dimych'},
@@ -39,8 +23,25 @@ let initialState = {
     ],
 
 };
+//----------------------------------------------------------------------------------------------------------------------
+//Types
+type dialogsStateType = {
+    dialogs: Array<DialogItemType>,
+    messages: Array<MessageType>
 
+}
+export type sendMessageCreatorType ={
+    newMessageBody:string
+    type:'SEND-MESSAGE'
+}
+export type updateNewMessageBodyCreatorType ={
+    type:'UPDATE-NEW-MESSAGE-BODY'
+    body:string
+}
+type ActionsType =  sendMessageCreatorType | updateNewMessageBodyCreatorType
 
+//----------------------------------------------------------------------------------------------------------------------
+//Reducer
 const dialogsReducer = (state: dialogsStateType = initialState, action: ActionsType):dialogsStateType => {
 
 
@@ -59,7 +60,8 @@ const dialogsReducer = (state: dialogsStateType = initialState, action: ActionsT
     }
 }
 
-
+//----------------------------------------------------------------------------------------------------------------------
+//Actions
 export const sendMessageCreator = (newMessageBody: string):sendMessageCreatorType => ({type: SEND_MESSAGE, newMessageBody});
 
 

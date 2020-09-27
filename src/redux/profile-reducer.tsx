@@ -5,20 +5,12 @@ import {profileAPI, usersAPI} from "../api/api";
 import {PostType} from "../components/Profile/MyPosts/Post/Post";
 
 const ADD_POST = 'ADD-POST';
-
+const DELETE_POST = 'DELETE_POST';
 const ADD_LIKE = 'ADD_LIKE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
-
-type profileStateType = {
-    posts: Array<PostType>
-    profile: null
-    status:string
-
-}
-
-let initialState:profileStateType = {
+let initialState: profileStateType = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 1},
         {id: 2, message: 'It`s my first post', likesCount: 5},
@@ -26,13 +18,25 @@ let initialState:profileStateType = {
     ],
 
     profile: null,
-    status:''
+    status: '',
+    newPostText: ''
 }
-
+//----------------------------------------------------------------------------------------------------------------------
+//Types
+type profileStateType = {
+    posts: Array<PostType>
+    profile: null
+    status: string
+    newPostText: string
+}
 
 export type AddPostType = {
     type: 'ADD-POST',
-    newPostText:string
+    newPostText: string
+}
+export type DeletePostType = {
+    type: 'DELETE_POST',
+    postId: number
 }
 export type AddLikeType = {
     type: 'ADD_LIKE',
@@ -50,13 +54,14 @@ export type SetUserProfileType = {
 }
 export type SetStatusType = {
     type: 'SET_STATUS',
-    status:string
+    status: string
 }
 
+export type ActionType = AddPostType | AddLikeType | UpdateNewPostTextType | SetUserProfileType | SetStatusType | DeletePostType
 
-export type ActionType = AddPostType | AddLikeType | UpdateNewPostTextType | SetUserProfileType | SetStatusType
-
-const profileReducer = (state: profileStateType = initialState, action: ActionType):profileStateType => {
+//----------------------------------------------------------------------------------------------------------------------
+//Reducer
+const profileReducer = (state: profileStateType = initialState, action: ActionType): profileStateType => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -68,8 +73,11 @@ const profileReducer = (state: profileStateType = initialState, action: ActionTy
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-
+                newPostText: ''
             }
+        }
+        case DELETE_POST:{
+            return {...state, posts:state.posts.filter(p=> p.id!== action.postId)}
 
         }
         case ADD_LIKE: {
@@ -96,13 +104,15 @@ const profileReducer = (state: profileStateType = initialState, action: ActionTy
             return state;
     }
 }
-
-
+//----------------------------------------------------------------------------------------------------------------------
+//Actions
 export const addLikeAC = (id: number) => ({type: ADD_LIKE, payload: {id}})
-export const  addPostActionCreator = (newPostText:string) => ({type: ADD_POST, newPostText});
-
+export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText});
+export const deletePost = (postId: number) => ({type: DELETE_POST, postId});
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status: string) => ({type: SET_STATUS, status});
+//----------------------------------------------------------------------------------------------------------------------
+//Thunks
 export const getUserProfile = (userId: any) => (dispatch: any) => {
     usersAPI.getProfile(userId).then((response: any) => {
         dispatch(setUserProfile(response.data));
@@ -110,19 +120,16 @@ export const getUserProfile = (userId: any) => (dispatch: any) => {
 }
 export const getStatus = (userId: number) => (dispatch: any) => {
     profileAPI.getStatus(userId).then((response: any) => {
-
         dispatch(setStatus(response.data));
     });
 }
 export const updateStatus = (status: string) => (dispatch: any) => {
-
     profileAPI.updateStatus(status)
         .then((response: any) => {
-      if(response.data.resultCode === 0){
-          dispatch(setStatus(status));
-      }
-
-    });
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status));
+            }
+        });
 }
 
 
