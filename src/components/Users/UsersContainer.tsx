@@ -37,15 +37,16 @@ type MapDispatchPropsType = {
 class UsersContainer extends React.Component<any> {
 
     componentDidMount(): void {
-        this.props.requestUsers(this.props.currentPage,this.props.pageSize );
+        const {currentPage,pageSize } = this.props
+        this.props.requestUsers(currentPage,pageSize );
 
 
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.requestUsers(pageNumber,this.props.pageSize );
+        const {pageSize} = this.props
+        this.props.requestUsers(pageNumber,pageSize );
     }
-
 
     render() {
 
@@ -69,18 +70,6 @@ class UsersContainer extends React.Component<any> {
     }
 
 }
-//
-// const mapStateToProps = (state: AppStoreType) => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
-
 const mapStateToProps = (state: AppStoreType) => {
     return {
         users: getUsers(state),
@@ -92,16 +81,12 @@ const mapStateToProps = (state: AppStoreType) => {
     }
 }
 
-
-
 let mapDispatchToProps = {
     follow,
     unfollow,
     setCurrentPage,
     toggleFollowingProgress,
     requestUsers
-
-
 }
 
 

@@ -1,7 +1,6 @@
 import {newPostType} from "./store";
 import {IPost} from "../components/Profile/MyPosts/MyPosts";
 import {profileAPI, usersAPI} from "../api/api";
-
 import {PostType} from "../components/Profile/MyPosts/Post/Post";
 
 const ADD_POST = 'ADD-POST';
@@ -113,23 +112,20 @@ export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profil
 export const setStatus = (status: string) => ({type: SET_STATUS, status});
 //----------------------------------------------------------------------------------------------------------------------
 //Thunks
-export const getUserProfile = (userId: any) => (dispatch: any) => {
-    usersAPI.getProfile(userId).then((response: any) => {
+export const getUserProfile = (userId: any) => async(dispatch: any) => {
+  const response =  await usersAPI.getProfile(userId);
         dispatch(setUserProfile(response.data));
-    });
 }
-export const getStatus = (userId: number) => (dispatch: any) => {
-    profileAPI.getStatus(userId).then((response: any) => {
+export const getStatus = (userId: number) =>async (dispatch: any) => {
+   const response = await profileAPI.getStatus(userId)
         dispatch(setStatus(response.data));
-    });
+
 }
-export const updateStatus = (status: string) => (dispatch: any) => {
-    profileAPI.updateStatus(status)
-        .then((response: any) => {
+export const updateStatus = (status: string) => async(dispatch: any) => {
+  const response = await  profileAPI.updateStatus(status)
             if (response.data.resultCode === 0) {
                 dispatch(setStatus(status));
             }
-        });
 }
 
 

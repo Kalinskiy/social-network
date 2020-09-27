@@ -1,19 +1,17 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/preloader/Preloader";
-import ProfileStatus from './ProfileStatus'
-import {updateStatus} from "../../../redux/profile-reducer";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 type PropsType = {
     profile: any
     status: string
-    updateStatus:string
+    updateStatus: string
 }
-const ProfileInfo = (props: PropsType) => {
+const ProfileInfo = ({profile, status, updateStatus}: PropsType) => {
 
 
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader/>
     }
 
@@ -29,19 +27,20 @@ const ProfileInfo = (props: PropsType) => {
             </div>
 
             <div className={s.desciptionBlock}>
-        
-                <img className={s.ava} src={props.profile.photos.large || 'https://img.icons8.com/officel/2x/person-male.png' }/>
 
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-                <div>Job: {props.profile.lookingForAJob}</div>
-                <div>Description: {props.profile.lookingForAJobDescription}</div>
-                <div>FullName: {props.profile.fullName}</div>
+                <img className={s.ava}
+                     src={profile.photos.large || 'https://img.icons8.com/officel/2x/person-male.png'}/>
+
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                <div>Job: {profile.lookingForAJob}</div>
+                <div>Description: {profile.lookingForAJobDescription}</div>
+                <div>FullName: {profile.fullName}</div>
                 <div>Contacts:
                     <div>
-                        <div> github: {props.profile.contacts.github} </div>
-                        <div> VK: {props.profile.contacts.vk}</div>
-                        <div> facebook: {props.profile.contacts.facebook}</div>
-                        <div> instagram: {props.profile.contacts.instagram}</div>
+                        <div> github: {profile.contacts.github} </div>
+                        <div> VK: {profile.contacts.vk}</div>
+                        <div> facebook: {profile.contacts.facebook}</div>
+                        <div> instagram: {profile.contacts.instagram}</div>
                     </div>
                 </div>
 

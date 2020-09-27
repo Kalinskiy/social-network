@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
@@ -32,20 +31,13 @@ class App extends React.Component<any> {
                     <HeaderContainer/>
                     <Navbar/>
                     <div className='app-wrapper-content'>
-
-                        <Route path='/profile/:userId?'
-
-                               render={() => <ProfileContainer/>}/>
-                        <Route path='/dialogs'
-
-                               render={() => <DialogsContainer/>}/>
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/news' render={() => <NewsContainer/>}/>
                         <Route path='/music' render={() => <Music/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/login' render={() => <LoginPage/>}/>
-
-
                     </div>
 
                 </div>

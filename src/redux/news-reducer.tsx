@@ -12,16 +12,14 @@ let initialState = {
 
 }
 
-export const newsReducer = (state=initialState, action: any) => {
+export const newsReducer = (state = initialState, action: any) => {
 
     switch (action.type) {
 
         case SET_NEWS:
             return {
                 ...state,
-                news:action.news
-
-
+                news: action.news
             }
 
         default:
@@ -30,31 +28,15 @@ export const newsReducer = (state=initialState, action: any) => {
 }
 
 
-
-export const setNews = (news:Array<any>) => ({type: SET_NEWS,news});
+export const setNews = (news: Array<any>) => ({type: SET_NEWS, news});
 
 export const getNews = () => {
-    return (dispatch: any) => {
-
-
-            newsAPI.getnews()
-                .then((data) => {
-
-
-                        dispatch(setNews(data.data.articles));
-
-                })
-                .catch((response) => {
-
-                    console.log('got error')
-                }
-                )
-
-
-
-
+    return async (dispatch: any) => {
+        let data = await newsAPI.getnews()
+        dispatch(setNews(data.data.articles));
     }
 }
+
 
 
 export default newsReducer;
