@@ -32,7 +32,7 @@ export type UsersTypeProps = {
 let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}: UsersTypeProps) => {
     return <>
         <Pagination pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}
-                    totalUsersCount={totalUsersCount}/>
+                    totalItemsCount={totalUsersCount} />
 
         {
             users.map((u: any) => <User user={u}

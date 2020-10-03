@@ -12,10 +12,10 @@ const reducers = combineReducers({
 
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
-    usersPage:usersReducer,
+    usersPage: usersReducer,
     auth: authReducer,
-    news:newsReducer,
-    app:appReducer,
+    news: newsReducer,
+    app: appReducer,
     form: formReducer
 
 })
@@ -24,8 +24,15 @@ const reducers = combineReducers({
 export type AppStoreType = ReturnType<typeof reducers>
 
 
-let store = createStore(reducers,applyMiddleware(thunkMiddleWare));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// @ts-ignore
+let store = createStore(reducers, composeEnhancers (applyMiddleware(thunkMiddleWare)));
 
+
+
+// @ts-ignore
+window.store =  store
 
 
 

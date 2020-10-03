@@ -3,4 +3,23 @@
 }
 .page{
     margin: 10px;
+
+
+
+}.paginator {
+     display: flex;
+    justify-content: center;
+
+
+ }
+.pageNumber {
+
+    padding: 5px;
+    border: 1px solid grey;
+
+}
+
+.pageNumber.selectedPage {
+    font-weight: bold;
+    border-color: black;
 }
