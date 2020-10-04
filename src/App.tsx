@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -34,7 +34,7 @@ class App extends React.Component<any> {
         }
 
         return (
-            <BrowserRouter>
+
                 <div className='app-wrapper'>
                     <HeaderContainer/>
                     <Navbar/>
@@ -49,7 +49,7 @@ class App extends React.Component<any> {
                     </div>
 
                 </div>
-            </BrowserRouter>
+
         );
     }
 }
@@ -62,11 +62,11 @@ let AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App) as React.ComponentClass;
 
 export let SamuraiJSApp = (props: any) => {
-    return <BrowserRouter>
+    return <HashRouter >
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 export default SamuraiJSApp
 
