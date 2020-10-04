@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, withRouter, Switch, Redirect} from "react-router-dom";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -23,9 +23,11 @@ const UsersContainer = React.lazy(() => import('./components/Users/UsersContaine
 
 
 class App extends React.Component<any> {
-    componentDidMount(): void {
 
+    componentDidMount(): void {
         this.props.initializeApp()
+    }
+    componentWillUnmount(): void {
     }
 
     render() {
@@ -35,10 +37,12 @@ class App extends React.Component<any> {
 
         return (
 
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className='app-wrapper-content'>
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <Switch>
+                        <Redirect from="/" to="/profile" />
                         <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                         <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                         <Route path='/users' render={withSuspense(UsersContainer)}/>
@@ -46,9 +50,11 @@ class App extends React.Component<any> {
                         <Route path='/music' render={() => <Music/>}/>
                         <Route path='/settings' render={() => <Settings/>}/>
                         <Route path='/login' render={() => <LoginPage/>}/>
-                    </div>
-
+                        <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
+
+            </div>
 
         );
     }
@@ -62,11 +68,11 @@ let AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App) as React.ComponentClass;
 
 export let SamuraiJSApp = (props: any) => {
-    return <HashRouter >
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </HashRouter>
+    </BrowserRouter>
 }
 export default SamuraiJSApp
 
