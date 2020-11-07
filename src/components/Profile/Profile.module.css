@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+
+    background-color: #EDEEF0;
+
+
+}
+
+.row1 {
+    width: 30%;
+}
+.row2 {
+    width: 68%;
+}

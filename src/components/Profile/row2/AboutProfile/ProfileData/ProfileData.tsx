@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import s from "./ProfileInfo.module.css";
-import edit from "../../../assets/icons/edit.png";
-import vkImg from '../../../assets/icons/contacts/vk.png'
-import facebookImg from '../../../assets/icons/contacts/facebook.png'
-import instagramImg from '../../../assets/icons/contacts/instagram.png'
-import githubImg from '../../../assets/icons/contacts/github.png'
-import youtubeImg from '../../../assets/icons/contacts/youtube.png'
+import s from "../../../row1/Avatar/Avatar.module.css";
+import edit from "../../../../../assets/icons/edit.png";
+import vkImg from '../../../../../assets/icons/contacts/vk.png'
+import facebookImg from '../../../../../assets/icons/contacts/facebook.png'
+import instagramImg from '../../../../../assets/icons/contacts/instagram.png'
+import githubImg from '../../../../../assets/icons/contacts/github.png'
+import youtubeImg from '../../../../../assets/icons/contacts/youtube.png'
 
 
 type ProfileDataPropsType = {
@@ -14,8 +14,8 @@ type ProfileDataPropsType = {
     goToEditMode: () => void
 }
 
-export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEditMode}: any) => {
-    console.log(profile.contacts)
+export const ProfileData: React.FC<ProfileDataPropsType> = (props: ProfileDataPropsType) => {
+    console.log(props.profile.contacts)
 
     const [isBlockOpen, setIsBlockOpen] = useState(true)
 
@@ -29,8 +29,8 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, g
             {
                 <div className={s.showInfo}>
                     <div className={s.showFullInformation} onClick={fetchFullInformation}>
-                        {isOwner && isBlockOpen && <div>
-                            <div className={s.editBlock} onClick={goToEditMode}>
+                        {props.isOwner && isBlockOpen && <div>
+                            <div className={s.editBlock} onClick={props.goToEditMode}>
                                 <img src={edit} alt=""/>
                             </div>
                         </div>}
@@ -41,37 +41,37 @@ export const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, g
                         isBlockOpen &&
                         <div>
                             <div className={s.descriptionLine}>
-                                Looking for a job: {profile.lookingForAJob ? "yes" : "no"}
+                                Looking for a job: {props.profile.lookingForAJob ? "yes" : "no"}
                             </div>
                             {
-                                profile.lookingForAJob && //if checked - true, then will be displayed my skills
+                                props.profile.lookingForAJob && //if checked - true, then will be displayed my skills
                                 <div className={s.descriptionLine}>
-                                    My skills: {profile.lookingForAJobDescription}
+                                    My skills: {props.profile.lookingForAJobDescription}
                                 </div>
                             }
                             <div className={s.descriptionLine}>
-                                About me:{profile.aboutMe}
+                                About me:{props.profile.aboutMe}
                             </div>
 
                             <div className={s.contacts}>
                                 <div className={s.contactItem}>
-                                    <a href={profile.contacts.vk} target="_blank">
+                                    <a href={props.profile.contacts.vk} target="_blank">
                                         <img src={vkImg} alt=''/>
                                     </a>
                                 </div>
                                 <div className={s.contactItem}>
-                                    <a href={profile.contacts.facebook} target="_blank">
+                                    <a href={props.profile.contacts.facebook} target="_blank">
                                         <img src={facebookImg} alt=''/>
                                     </a>
                                 </div>
                                 <div className={s.contactItem}>
-                                    <a href={profile.contacts.instagram} target="_blank">
+                                    <a href={props.profile.contacts.instagram} target="_blank">
                                         <img src={instagramImg}
                                              alt=''/>
                                     </a>
                                 </div>
                                 <div className={s.contactItem}>
-                                    <a href={profile.contacts.github} target="_blank">
+                                    <a href={props.profile.contacts.github} target="_blank">
                                         <img src={githubImg} alt=''/>
                                     </a>
                                 </div>

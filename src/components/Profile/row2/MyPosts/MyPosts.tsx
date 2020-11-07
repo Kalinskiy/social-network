@@ -2,8 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {Field, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../../utilities/validators/validators";
-import {TextArea} from "../../common/FormsControls/FormControls";
+import {maxLengthCreator, required} from "../../../../utilities/validators/validators";
+import {TextArea} from "../../../common/FormsControls/FormControls";
 
 
 export type IPost = {
@@ -17,7 +17,7 @@ export type PostsType = {
     addLike: (id: number) => void
     posts: Array<IPost>
     newPostText: string
-    profile:any
+    profile: any
 }
 
 const MyPosts = React.memo((props: PostsType) => {
@@ -39,13 +39,12 @@ const MyPosts = React.memo((props: PostsType) => {
 
     return (
         <div className={s.postsBlock}>
-            <h3>my posts</h3>
+            <span className={s.postTitle}>My Posts</span>
 
             <AddNewPostFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {/*PostData maping*/}
                 {postsElement}
-
             </div>
         </div>
 
@@ -57,25 +56,24 @@ let AddNewPostForm = (props: any) => {
 
 
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component={TextArea}
-                       name={'newPostText'}
-                       placeholder={'Enter your post here'}
-                       validate={[required, maxLength10]}
+        <div className={s.container}>
+            <form onSubmit={props.handleSubmit}>
+                <div className={s.formPost}>
+                    <Field component={TextArea}
+                           name={'newPostText'}
+                           placeholder={'What`s new?'}
+                           validate={[required, maxLength10]}
 
 
-                />
+                    />
 
-            </div>
-            <div>
-                <button
-                    // onClick={props.reset} как занулить инпут?
-                >Add Post
-                </button>
-            </div>
-        </form>
+                    <div className={s.formButton}>
+                        <button>Post</button>
+                    </div>
+                </div>
 
+            </form>
+        </div>
     )
 }
 

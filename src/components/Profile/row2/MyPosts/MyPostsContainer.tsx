@@ -1,9 +1,8 @@
 import React, {Dispatch} from 'react';
-import {addLikeAC, addPostActionCreator} from '../../../redux/profile-reducer';
+import {addLikeAC, addPostActionCreator} from '../../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
 import {reset} from "redux-form";
-import {AppStoreType} from "../../../redux/redux-store";
 
 
 let mapStateToProps = (state:any) => {

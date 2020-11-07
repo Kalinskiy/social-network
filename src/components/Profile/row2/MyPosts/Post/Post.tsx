@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import s from './Post.module.css';
 import {useSelector} from "react-redux";
-import {AppStoreType} from "../../../../redux/redux-store";
+import {AppStoreType} from "../../../../../redux/redux-store";
 
 
 
@@ -26,16 +26,11 @@ const Post = (props: any) => {
             <img
                 src={myPhoto}/>
             {props.message}
-
-            <div>
                 <span   onClick={ () =>
-                    // @ts-ignore
-                    props.addLike(props.id)} className={s.like}>♥
-
+                    props.addLike(props.id)} className={s.like}>{props.likesCount}♥
                 </span>
-                {props.likesCount}
-                {/*{props.likesCount}*/}
-            </div>
+
+
         </div>
 
 

@@ -1,7 +1,7 @@
 import {newPostType} from "./store";
-import {IPost} from "../components/Profile/MyPosts/MyPosts";
+import {IPost} from "../components/Profile/row2/MyPosts/MyPosts";
 import {profileAPI, usersAPI} from "../api/api";
-import {PostType} from "../components/Profile/MyPosts/Post/Post";
+import {PostType} from "../components/Profile/row2/MyPosts/Post/Post";
 import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'ADD-POST';
@@ -19,7 +19,6 @@ let initialState = {
         {id: 2, message: 'It`s my first post', likesCount: 5},
         {id: 3, message: 'Third one', likesCount: 9},
     ],
-
     profile: {
         photos: {
             small: 'dsfdsf',

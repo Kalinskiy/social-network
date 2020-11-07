@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import style from './Friends.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {AppStoreType} from "../../redux/redux-store";
-import {getFriends, UsersType} from "../../redux/friends-reducer";
+import {AppStoreType} from "../../../../redux/redux-store";
+import {getFriends, UsersType} from "../../../../redux/friends-reducer";
 
 
 export const Friends = () => {

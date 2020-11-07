@@ -1,0 +1,38 @@
+
+
+.postsBlock {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 30px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px 0 0 20px;
+}
+
+.posts {
+    margin-top: 10px
+}
+.formPost{
+    padding: 20px;
+    display: flex;
+    width: 100%;
+
+}
+
+.formPost textarea{
+    width: 500px;
+    height: 50px;
+    resize: none;
+
+}
+.formButton{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left:20px;
+    width:60px;
+}
+.postTitle{
+    font-size: 20px;
+}

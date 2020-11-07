@@ -1,13 +1,14 @@
 import React from 'react';
-import {ProfileInfo, ProfileType} from "./ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {Avatar, ProfileType} from "./row1/Avatar/Avatar";
+import MyPostsContainer from "./row2/MyPosts/MyPostsContainer";
 import s from './Profile.module.css'
-import {Friends} from "../Friends/Friends";
+import {Friends} from "./row1/Friends/Friends";
+import {AboutProfile} from "./row2/AboutProfile/AboutProfile";
 
 
 export type PropsType = {
 
-    profile: any
+    profile: ProfileType
     status: string
     updateStatus: string
     isOwner: any
@@ -18,12 +19,28 @@ export type PropsType = {
 function Profile(props: PropsType) {
 
     return (
-        <div className={s.wrapper}>
-            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}
-                         isOwner={props.isOwner} savePhoto={props.savePhoto} saveProfile={props.saveProfile}/>
-            <Friends/>
-            <MyPostsContainer/>
+        <div className={s.container}>
+            <div className={s.row1}>
+                <Avatar profile={props.profile}
+                        isOwner={props.isOwner}
+                        savePhoto={props.savePhoto}
+                />
+                <Friends/>
+            </div>
+            <div className={s.row2}>
+                <AboutProfile
+                    fullName={props.profile.fullName}
+                    isOwner={props.isOwner}
+                    saveProfile={props.saveProfile}
+                    status={props.status}
+                    profile={props.profile}
+                />
+                <MyPostsContainer/>
+            </div>
+
         </div>
+
+
     )
 }
 
