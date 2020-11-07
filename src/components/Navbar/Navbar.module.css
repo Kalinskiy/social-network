@@ -1,34 +1,40 @@
 .nav {
-    grid-area: n;
-    background-color: inherit;
-    padding: 20px 0;
-
-
+    display: flex;
+    flex-direction: column;
+    width:200px;
 }
+
 .item {
-    margin-top:15px;
+    margin-top: 15px;
+    display: block;
 
 }
+
+.item img {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+
+
+}
+
 .item a {
-    color: #4682B4;
+    color: #99B1C6;
     font-size: 20px;
     display: block;
     text-decoration: none;
-
+    padding: 2px 0;
 }
 
-.item a.activeLink {
-    color: #0f1e3d;
+/*.item a.activeLink {*/
+/*    background-color: #c5d4e2;*/
+/*    color: white;*/
+/*}*/
 
-    border-top:1px solid #c5d4e2;
-    border-bottom: 1px solid #c5d4e2;
-
-
-}
 .item a:hover {
-    background-color: #4682B4;
-    color:white;
+    background-color: #DCE1E5;
     cursor: pointer;
-    transition: width 2s, background-color 1s, height 4s; /* плаыный переход*/
+    /*transition: width 1s, background-color 1s, height 4s; !* плаыный переход*!*/
 }
 

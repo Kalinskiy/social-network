@@ -5,6 +5,7 @@ import {AppStoreType} from "../../redux/redux-store";
 import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
 import {withRouter} from 'react-router-dom';
 import {compose} from 'redux';
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 
 export type PropsType = {
@@ -55,7 +56,7 @@ class ProfileContainer extends React.Component<any> {
     }
 }
 
-const mapStateToProps = (state: AppStoreType) => ({
+const mapStateToProps = (state: any) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.auth.userId,
@@ -67,5 +68,5 @@ const mapStateToProps = (state: AppStoreType) => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter,
-    // WithAuthRedirect,
+    WithAuthRedirect,
 )(ProfileContainer)

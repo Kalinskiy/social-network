@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from "react-router-dom";
-import Pagination from "../common/Paginator/Pagination";
 
 
 export type UserType = {
@@ -31,41 +30,45 @@ export type UsersTypeProps = {
 
 }
 
-let User = ({user,followingInProgress,unfollow,follow}:any) => {
+let User = ({user, followingInProgress, unfollow, follow}: any) => {
     return <div>
-                <span>
-                    <div>
-                        <NavLink to={`/profile/` + user.id}>
-                        <img src={user.photos.small != null ? user.photos.small : userPhoto} className={s.usersPhoto} alt={''}
+        <div className={s.container}>
+            <div className={s.userInfo}>
+                <div className={s.userInfo}>
+                    <div>{user.name}</div>
+                    <div>ID: {user.id}</div>
+                    <div>{user.status}</div>
+                </div>
+
+
+                <NavLink to={`/profile/` + user.id}>
+                    <div className={s.photoContainer}>
+                        <img src={user.photos.small != null ? user.photos.small : userPhoto} className={s.usersPhoto}
+                             alt={''}
                              key={user.id}/>
-                        </NavLink>
                     </div>
-                    <div>
-                        {user.followed
+                </NavLink>
+                <div>
+                    {user.followed
 
-                            ? <button disabled={followingInProgress.some((id:number) => id === user.id)} onClick={() => {
-                                unfollow(user.id)
-                            }}>Unfollow</button>
-                            : <button disabled={followingInProgress.some((id:number) => id === user.id)} onClick={() => {
-                                follow(user.id)
-                            }}>Follow</button>
-                        }
-
-                    </div>
-                </span>
-                    <span>
-                    <span>
-                        <div>{user.name}</div>
-                        <div>ID: {user.id}</div>
-                        <div>{user.status}</div>
-                    </span>
-                        <span>
-                            <div>{"user.location.country"}</div>
-                            <div>{"user.location.city"}</div>
-                        </span>
-                </span>
+                        ?
+                        <button disabled={followingInProgress.some((id: number) => id === user.id)} onClick={() => {
+                            unfollow(user.id)
+                        }}>Unfollow</button>
+                        :
+                        <button disabled={followingInProgress.some((id: number) => id === user.id)} onClick={() => {
+                            follow(user.id)
+                        }}>Follow</button>
+                    }
 
                 </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 }
 

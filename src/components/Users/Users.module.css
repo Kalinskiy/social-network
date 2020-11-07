@@ -1,5 +1,12 @@
+.userBlock{
+    border:1px solid #E7E8EC;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
 .usersPhoto {
-    width:70px;
+    width:100px;
 }
 .selectedPage {
     font-weight: bold;
@@ -11,4 +18,19 @@
     margin:2px;
     font-size: 20px;
     cursor: pointer;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid #E7E8EC;
+}
+.userInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.photoContainer{
+    background-color: rgb(237,238,240);
 }

@@ -11,14 +11,37 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 
-let initialState: profileStateType = {
+
+type InitStateType = typeof initialState
+let initialState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 1},
         {id: 2, message: 'It`s my first post', likesCount: 5},
         {id: 3, message: 'Third one', likesCount: 9},
     ],
 
-    profile: null,
+    profile: {
+        photos: {
+            small: 'dsfdsf',
+            large: 'dsfdsf'
+        },
+        aboutMe: null,
+        userId: null,      //required(integer)
+        lookingForAJob: null,     //required(boolean)
+        lookingForAJobDescription: null,     //required(string)
+        fullName: null,     //required(string)
+        contacts: {
+            github: null,     //required(string)
+            vk: null,     //required(string)
+            facebook: null,     //required(string)
+            instagram: null,     //required(string)
+            twitter: null,     //required(string)
+            website: null,     //required(string)
+            youtube: null,     //required(string)
+            mainLink: null
+        },     //required(object)
+        //required(string)
+    },
     status: '',
     newPostText: '',
     photos: null
@@ -76,7 +99,7 @@ export type ActionType =
 
 //----------------------------------------------------------------------------------------------------------------------
 //Reducer
-const profileReducer = (state: profileStateType = initialState, action: ActionType): profileStateType => {
+const profileReducer = (state: InitStateType = initialState, action: ActionType): profileStateType => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -88,7 +111,8 @@ const profileReducer = (state: profileStateType = initialState, action: ActionTy
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
+                newPostText: '',
+
             }
         }
         case DELETE_POST: {
@@ -136,6 +160,7 @@ export const setPhotoSuccess = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, phot
 //Thunks
 export const getUserProfile = (userId: any) => async (dispatch: any) => {
     const response = await usersAPI.getProfile(userId);
+    console.log(response)
     dispatch(setUserProfile(response.data));
 }
 export const getStatus = (userId: number) => async (dispatch: any) => {
@@ -151,6 +176,7 @@ export const updateStatus = (status: string) => async (dispatch: any) => {
 }
 export const savePhoto = (file: any) => async (dispatch: any) => {
     const response = await profileAPI.savePhoto(file)
+
     try {
         if (response.data.resultCode === 0) {
             dispatch(setPhotoSuccess(response.data.data.photos));

@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -32,8 +31,21 @@ export const usersAPI = {
     getProfile(userId: number) {
         console.log('Obsolete method. Please use  profileAPI')
         return profileAPI.getProfile(userId)
+    },
+    getFriends(pageSize = 6) {
+        return instance.get(`users?count=${pageSize}`)
+            .then(response => {
 
-    }
+                return response.data.items
+            })
+    },
+    getOnlineFriends( pageSize = 4) {
+        return instance.get(`users?count=${pageSize}`)
+            .then(response => {
+                return response.data.items
+            })
+    },
+
 
 }
 export const profileAPI = {

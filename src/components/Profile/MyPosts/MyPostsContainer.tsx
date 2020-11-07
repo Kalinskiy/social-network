@@ -6,20 +6,13 @@ import {reset} from "redux-form";
 import {AppStoreType} from "../../../redux/redux-store";
 
 
-export type IPost = {
-    id: number
-    message: string
-    likesCount: string
-}
-export type PostsType = {
+let mapStateToProps = (state:any) => {
 
-    store: any
-}
-
-let mapStateToProps = (state:AppStoreType) => {
     return {
         posts: state.profilePage.posts,
-        newPostText: state.profilePage.newPostText
+        newPostText: state.profilePage.newPostText,
+        profile: state.profilePage.profile,
+
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch<any>) => {

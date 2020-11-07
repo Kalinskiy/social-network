@@ -11,7 +11,7 @@ import AddMessageForm from "./Message/AddMessageForm/AddMessageForm";
 export const Dialogs = (props: any) => {
     let state = props.dialogsPage;
 
-    let dialogsElements = state.dialogs.map((d: any) => <DialogItem name={d.name} id={d.id}/>);
+    let dialogsElements = state.dialogs.map((d: any) => <DialogItem name={d.name} id={d.id} photo={d.photo}/>);
     let messagesElements = state.messages.map((m: any) => <Message message={m.message}
     />);
 

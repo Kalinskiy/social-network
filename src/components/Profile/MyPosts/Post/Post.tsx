@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import s from './Post.module.css';
+import {useSelector} from "react-redux";
+import {AppStoreType} from "../../../../redux/redux-store";
 
 
 
@@ -8,10 +10,13 @@ export type PostType = {
     message: string
     likesCount: number
     addLike?: (id: number) => void
+
+
 }
 
-
-const Post = (props: PostType) => {
+const Post = (props: any) => {
+ //@ts-ignore
+    const myPhoto = useSelector(state => state.profilePage.profile.photos.large)
 
 
 
@@ -19,7 +24,7 @@ const Post = (props: PostType) => {
 
         <div className={s.item}>
             <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNsyykYTyoBVPpuwQMZ8YVcLVNHzvDwd9ixA&usqp=CAU"/>
+                src={myPhoto}/>
             {props.message}
 
             <div>

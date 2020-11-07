@@ -1,15 +1,212 @@
-
 .photo {
-    width: 100px;
-    height: 100px;
-    margin-top: 10px;
-    border-radius: 50%;
-}
-.mainPicture img{
-     width:1000px;
-    opacity: 0.8;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    background-size: cover;
+    border-radius: 5px;
+    /*border-radius: 50%;*/
 }
 
-.desciptionBlock {
-    padding: 0  20px;
+.wrapper {
+    display: flex;
+    background-color: #EDEEF0;
+
 }
+
+
+.photoBlock {
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+    padding: 10px 20px;
+    height: fit-content;
+    margin: 10px 20px;
+    border-radius: 5px;
+}
+
+.photoBlock button {
+    margin-top: 10px;
+}
+
+
+.photoBlock input[type='file'] { /* скрывает надпись файл не выбран*/
+    color: transparent;
+    position: absolute;
+    top: 300px;
+}
+
+.edit {
+    width: 100%;
+    background-color: #ffff;
+    margin: 10px 0 0 0;
+    padding: 10px 20px;
+}
+
+.fullName {
+    font-weight: 600;
+    font-size: 24px;
+    padding: 30px;
+}
+
+.status {
+    padding: 10px 30px;
+    position: relative;
+    border-bottom: 1px solid rgb(231, 232, 236);;
+
+}
+
+
+.editInfo {
+    display: block;
+    /*border: 1px solid rgb(231, 232, 236);*/
+    position: relative;
+    padding: 10px 0 30px 30px;
+
+
+}
+
+.privateProfile {
+    color: darkgray;
+    text-align: center;
+    margin: 10px;
+}
+
+.showFullInformation {
+
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    position: relative;
+
+}
+
+.showFullInformation:hover {
+    background-color: #F1F2F6;
+    cursor: pointer;
+}
+
+.descriptionLine {
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(231, 232, 236);
+}
+
+
+/*animation*/
+.editBlock {
+    display: block;
+    margin: 0 auto;
+    -o-animation-duration: 10s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-timing-function: linear;
+    animation-name: rotation;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    cursor: pointer;
+    overflow: hidden;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.editBlock img {
+    width: 35px;
+}
+
+.contacts {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 0;
+}
+
+.contactItem {
+    position: relative;
+    cursor: pointer;
+
+}
+
+.contactItem:hover {
+    transform: scale(1.05);
+    transition: transform .1s linear;
+
+}
+
+.contactItem:hover:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: rgb(231, 232, 236);
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+
+
+}
+
+@-webkit-keyframes rotation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes rotation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes rotation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(720deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .img {
+        width: 60px;
+    }
+}
+
+/*animation ends*/

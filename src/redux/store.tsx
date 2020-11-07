@@ -12,6 +12,8 @@ export type newPostType = {
 
 
 }
+
+
 let store:any = {
     _state: {
         profilePage: {

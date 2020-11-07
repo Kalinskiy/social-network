@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {reduxForm} from "redux-form";
 import {createField, Input} from "../common/FormsControls/FormControls";
 import {required} from "../../utilities/validators/validators";
@@ -16,6 +16,9 @@ type FormDataType = {
 
 
 const LoginForm = ({handleSubmit, error, captchaUrl}: any) => {
+    useEffect(()=>{
+
+    },[])
 
     return <>
         <form onSubmit={handleSubmit}>

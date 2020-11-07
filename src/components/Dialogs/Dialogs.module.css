@@ -3,20 +3,27 @@
     grid-template-columns: 3fr 7fr;
 
 }
-
+.dialogs img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
 .dialogsItems {
     padding: 25px;
-
-
 }
 
 .dialogsItems a {
     text-decoration: none;
     color: #4682B4;
-    display: block;
     transition: width 2s, background-color 1s, height 4s; /* плаыный переход*/
-    margin: 25px 0;
+    margin: 20px 0;
     font-size: 18px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
 
 
 }
@@ -36,15 +43,16 @@
 
 
 .messages {
-    padding: 25px;
+    padding: 20px;
 
 }
 
 .message {
-    margin: 10px 0;
-
+    padding:8px;
+    margin:20px 0;
     font-size: 18px;
 }
-.message:nth-child(odd ){
-    background-color: white;
+.message:nth-child(odd){
+    background-color: #EDEEF0;
+
 }

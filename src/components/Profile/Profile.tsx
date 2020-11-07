@@ -1,8 +1,8 @@
 import React from 'react';
-import {IPost} from "./MyPosts/MyPosts";
-import ProfileInfo, {ProfileType} from "./ProfileInfo/ProfileInfo";
+import {ProfileInfo, ProfileType} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {updateStatus} from "../../redux/profile-reducer";
+import s from './Profile.module.css'
+import {Friends} from "../Friends/Friends";
 
 
 export type PropsType = {
@@ -16,10 +16,12 @@ export type PropsType = {
 }
 
 function Profile(props: PropsType) {
+
     return (
-        <div>
+        <div className={s.wrapper}>
             <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}
                          isOwner={props.isOwner} savePhoto={props.savePhoto} saveProfile={props.saveProfile}/>
+            <Friends/>
             <MyPostsContainer/>
         </div>
     )

@@ -1,19 +1,21 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+import {New} from "./New/New";
 
 
-let Users = (props: any) => {
-    console.log(props)
+let News = (props: any) => {
     return <>
-        {/* с {props.news.map} не работает*/}
-        {props.news.length>0?props.news[11].content:''}
-        {props.news.map((n:any)=> {
-            return <div>{n.title}</div>
-        } )}
-        {/*{props.news.length>0? props.news.forEach((e:any)=>{return <span>{e}</span>;}):''}*/}
-
-
-
+        {props.news.map((n: any) =>
+            <New
+                key={n.id}
+                title={n.title}
+                urlToImage={n.urlToImage}
+                description={n.description}
+                publishedAt={n.publishedAt}
+            />
+        )}
     </>
+
 }
 
-export default Users
+
+export default News

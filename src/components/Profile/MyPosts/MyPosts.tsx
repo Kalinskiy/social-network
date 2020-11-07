@@ -1,10 +1,9 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {Field, reduxForm, reset} from "redux-form";
+import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utilities/validators/validators";
 import {TextArea} from "../../common/FormsControls/FormControls";
-import {useDispatch} from "react-redux";
 
 
 export type IPost = {
@@ -14,18 +13,24 @@ export type IPost = {
 }
 
 export type PostsType = {
-
     addPost: (newPostText: string) => void
     addLike: (id: number) => void
     posts: Array<IPost>
     newPostText: string
+    profile:any
 }
 
 const MyPosts = React.memo((props: PostsType) => {
 
 
-    let postsElement = [...props.posts].reverse().map((p) => <Post key={p.id} id={p.id} addLike={props.addLike}
-                                                                   message={p.message} likesCount={p.likesCount}/>)
+    let postsElement = [...props.posts].reverse().map((p) =>
+        <Post
+            key={p.id}
+            id={p.id}
+            addLike={props.addLike}
+            message={p.message}
+            likesCount={p.likesCount}
+        />)
 
 
     let onAddPost = (values: any) => {
@@ -66,7 +71,8 @@ let AddNewPostForm = (props: any) => {
             <div>
                 <button
                     // onClick={props.reset} как занулить инпут?
-                >Add Post</button>
+                >Add Post
+                </button>
             </div>
         </form>
 
