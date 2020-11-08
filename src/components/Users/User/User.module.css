@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgb(237, 238, 240);
+    padding: 10px;
+
+}
+
+.photoContainer img {
+    width: 100px;
+}
+
+.col1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-basis: 30%;
+}
+
+.userDescription {
+    text-align: start;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 30%;
+    overflow: hidden;
+
+
+
+}

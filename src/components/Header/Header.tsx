@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import s from './Header.module.css';
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import logo from '../../assets/icons/logo.png'
 import {useSelector} from "react-redux";
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Pagination from "../common/Paginator/Pagination";
-import User from "./User";
+import User from "./User/User";
+import style from './Users.module.css'
 
 
 export type UserType = {
@@ -30,7 +31,7 @@ export type UsersTypeProps = {
 }
 
 let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}: UsersTypeProps) => {
-    return <>
+    return <div className={style.container}>
 
 
         {
@@ -43,7 +44,7 @@ let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...p
             )}
         <Pagination pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}
                     totalItemsCount={totalUsersCount} />
-    </>
+    </div>
 }
 
 export default Users

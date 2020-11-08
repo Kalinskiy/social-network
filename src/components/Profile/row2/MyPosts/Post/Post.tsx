@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import s from './Post.module.css';
 import {useSelector} from "react-redux";
-import {AppStoreType} from "../../../../../redux/redux-store";
-
-
+import like from '../../../../../assets/icons/like.png'
+import liked from '../../../../../assets/icons/liked.png'
 
 export type PostType = {
-    id:number
+    id: number
     message: string
     likesCount: number
     addLike?: (id: number) => void
@@ -14,20 +13,31 @@ export type PostType = {
 
 }
 
-const Post = (props: any) => {
- //@ts-ignore
-    const myPhoto = useSelector(state => state.profilePage.profile.photos.large)
 
+const Post = (props: any) => {
+    //@ts-ignore
+    const myPhoto = useSelector(state => state.profilePage.profile.photos.large)
+    const [isLike, setIsLike] = useState(false)
+    const likeClick = () => {
+        setIsLike(!isLike)
+
+    }
 
 
     return (
-
         <div className={s.item}>
-            <img
-                src={myPhoto}/>
-            {props.message}
-                <span   onClick={ () =>
-                    props.addLike(props.id)} className={s.like}>{props.likesCount}♥
+            <img className={s.myPhoto}
+                 src={myPhoto}/>
+            <div className={s.postText}>
+                {props.message}
+            </div>
+            <span className={s.like} onClick={likeClick}>
+                 {/*onClick={() => props.addLike(props.id)}*/}
+                <img src={props.likesCount >= 1 || isLike ? liked : like}/>
+                {props.likesCount >= 1 || isLike ? '1' : null}
+                {/*{props.likesCount}*/}
+                {}
+
                 </span>
 
 

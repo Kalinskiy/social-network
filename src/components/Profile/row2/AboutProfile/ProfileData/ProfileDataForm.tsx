@@ -10,6 +10,7 @@ import React from "react";
 type PropsType = {
     profile: ProfileType
     onSubmit: (profile: ProfileType) => void
+    onCancel:(editMode:boolean)=>void
 }
 
 export const ProfileDataForm = (props:any) => {
@@ -37,7 +38,6 @@ export const ProfileDataForm = (props:any) => {
 
         },
         onSubmit: values => {
-            debugger
             let obj = {
                 FullName: values.FullName,
                 AboutMe: values.AboutMe,

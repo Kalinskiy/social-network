@@ -35,7 +35,6 @@ export const usersAPI = {
     getFriends(pageSize = 6) {
         return instance.get(`users?count=${pageSize}`)
             .then(response => {
-
                 return response.data.items
             })
     },

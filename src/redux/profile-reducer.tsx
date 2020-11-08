@@ -15,9 +15,21 @@ const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 type InitStateType = typeof initialState
 let initialState = {
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 1},
-        {id: 2, message: 'It`s my first post', likesCount: 5},
-        {id: 3, message: 'Third one', likesCount: 9},
+        {
+            id: 1,
+            message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores culpa cupiditate magni sunt! Ipsum laboriosam, odit rerum sint voluptate voluptatibus!',
+            likesCount: 1
+        },
+        {
+            id: 2,
+            message: ' dolor sit amet, consectetur adipisicing elit. Asperiores culpa cupiditate magni sunt! Ipsum laboriosam, odit rerum sint voluptate voluptatib',
+            likesCount: 0
+        },
+        {
+            id: 3,
+            message: ' dolor sit amet, consectetur adipisicing elit. Asperiores culpa cupiditate magni sunt! Ipsum laboriosam, odit rerum sint voluptate voluptatibonsectetur adipisicing elit. Asperiores culpa cupiditate magni sunt! Ipsum l',
+            likesCount: 0
+        },
     ],
     profile: {
         photos: {
@@ -191,8 +203,8 @@ export const saveProfile = (profile: any) => async (dispatch: any, getState: any
 
     if (response.data.resultCode === 0) {
         dispatch(getUserProfile(userId));
-    }else {
-        dispatch(stopSubmit('edit-profile',{_error: response.data.messages[0]}))
+    } else {
+        dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
         return Promise.reject(response.data.messages[0])
     }
 }

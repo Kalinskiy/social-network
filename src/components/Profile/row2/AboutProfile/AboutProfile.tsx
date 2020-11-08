@@ -15,6 +15,9 @@ type AboutProfileType = {
 }
 export const AboutProfile = (props: AboutProfileType) => {
     const [editMode, setEditMode] = useState(false)
+    const onCancel = ()=>{
+        setEditMode(false)
+    }
     return <>
         <div className={s.edit}>
                     <span className={s.fullName}>
@@ -25,7 +28,7 @@ export const AboutProfile = (props: AboutProfileType) => {
             </div>
 
             {editMode
-                ? <ProfileDataForm profile={props.profile}   onSubmit={props.saveProfile} />
+                ? <ProfileDataForm profile={props.profile}   onSubmit={props.saveProfile} onCancel={onCancel} />
                 : <ProfileData goToEditMode={() => {setEditMode(true)
                 }}
                                profile={props.profile} isOwner={props.isOwner}
