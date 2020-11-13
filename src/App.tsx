@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, HashRouter, Route, withRouter, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -12,7 +12,7 @@ import LoginPage from "./components/Login/Login";
 import NewsContainer from "./components/News/NewsContainer";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
-import Preloader from "./components/common/preloader/Preloader";
+import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
 import {compose} from 'redux';
 import {withSuspense} from "./hoc/withSuspense";
@@ -51,7 +51,7 @@ class App extends React.Component<any> {
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/settings' render={() => <Settings/>}/>
                             <Route path='/login' render={() => <LoginPage/>}/>
-                            <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                            <Route exact path='*' render={() => <div>404 NOT FOUND</div>}/>
                         </Switch>
                     </div>
 

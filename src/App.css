@@ -19,6 +19,7 @@ body {
     padding: 0;
     grid-area:c;
     background-color: #ffffff;
+    margin-top: 10px;
 }
 
 button {

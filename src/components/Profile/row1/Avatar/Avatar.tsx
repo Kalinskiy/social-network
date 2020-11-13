@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useRef} from 'react';
 import s from './Avatar.module.css';
-import Preloader from "../../../common/preloader/Preloader";
+import Preloader from "../../../common/Preloader/Preloader";
 import userPhoto from '../../../../assets/images/user.png'
 
 export type ProfileType = {

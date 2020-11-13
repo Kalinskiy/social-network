@@ -33,7 +33,6 @@ export type UsersTypeProps = {
 let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}: UsersTypeProps) => {
     return <div className={style.container}>
 
-
         {
             users.map((u: any) => <User user={u}
                                         key={u.id}
@@ -42,8 +41,10 @@ let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...p
                                         follow={props.follow}
                 />
             )}
-        <Pagination pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}
-                    totalItemsCount={totalUsersCount} />
+        {/*<div className={style.paginator}>*/}
+        {/*    <Pagination pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}*/}
+        {/*                totalItemsCount={totalUsersCount}/>*/}
+        {/*</div>*/}
     </div>
 }
 

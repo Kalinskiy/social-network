@@ -1,5 +1,6 @@
 import {newsAPI} from "../api/api";
-import {toggleIsFetching} from "./users-reducer";
+import {toggleIsFetching} from "./app-reducer";
+
 
 const SET_NEWS = 'SET_NEWS';
 
@@ -31,11 +32,11 @@ export const newsReducer = (state = initialState, action: any) => {
 
 export const setNews = (news: Array<any>) => ({type: SET_NEWS, news});
 
+
 export const getNews = () => {
     return async (dispatch: any) => {
         dispatch(toggleIsFetching(true));
         let data = await newsAPI.getnews()
-        console.log(data)
         dispatch(setNews(data.data.articles));
         dispatch(toggleIsFetching(false));
     }

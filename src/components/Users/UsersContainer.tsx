@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {follow, requestUsers, setCurrentPage, toggleFollowingProgress, unfollow} from "../../redux/users-reducer";
 import Users, {UserType} from "./Users";
-import Preloader from "../common/preloader/Preloader";
+import Preloader from "../common/Preloader/Preloader";
 import {AppStoreType} from "../../redux/redux-store";
 import {compose} from 'redux';
 import {
@@ -13,6 +13,8 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/users-selectors";
+import style from "./Users.module.css";
+import Pagination from "../common/Paginator/Pagination";
 
 
 type MapStatePropsType = {
@@ -37,39 +39,47 @@ type MapDispatchPropsType = {
 class UsersContainer extends React.Component<any> {
 
     componentDidMount(): void {
-        const {currentPage,pageSize } = this.props
-        this.props.requestUsers(currentPage,pageSize );
+        const {currentPage, pageSize} = this.props
+        this.props.requestUsers(currentPage, pageSize);
 
 
     }
 
     onPageChanged = (pageNumber: number) => {
         const {pageSize} = this.props
-        this.props.requestUsers(pageNumber,pageSize );
+        this.props.requestUsers(pageNumber, pageSize);
     }
 
     render() {
 
 
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
-            <Users totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   currentPage={this.props.currentPage}
-                   onPageChanged={this.onPageChanged}
-                   users={this.props.users}
-                   follow={this.props.follow}
-                   unfollow={this.props.unfollow}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}
-                   followingInProgress={this.props.followingInProgress}
+            {this.props.isFetching ? <Preloader/> :
+                <>
+                    <Users totalUsersCount={this.props.totalUsersCount}
+                           pageSize={this.props.pageSize}
+                           currentPage={this.props.currentPage}
+                           onPageChanged={this.onPageChanged}
+                           users={this.props.users}
+                           follow={this.props.follow}
+                           unfollow={this.props.unfollow}
+                           toggleFollowingProgress={this.props.toggleFollowingProgress}
+                           followingInProgress={this.props.followingInProgress}
 
 
-            />
+                    />
+
+
+                </>
+            }
+            <Pagination pageSize={this.props.pageSize} currentPage={this.props.currentPage} onPageChanged={this.onPageChanged}
+                        totalItemsCount={this.props.totalUsersCount}/>
         </>
 
     }
 
 }
+
 const mapStateToProps = (state: AppStoreType) => {
     return {
         users: getUsers(state),
@@ -90,9 +100,6 @@ let mapDispatchToProps = {
 }
 
 
-
-
 export default compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps)
-
 )(UsersContainer)

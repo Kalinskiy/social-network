@@ -6,6 +6,7 @@ import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from ".
 import {withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import Preloader from "../common/Preloader/Preloader";
 
 
 export type PropsType = {
@@ -41,15 +42,19 @@ class ProfileContainer extends React.Component<any> {
     render() {
 
         return (
-            < Profile
-                isOwner={!this.props.match.params.userId}
-                {...this.props}
-                profile={this.props.profile}
-                status={this.props.status}
-                updateStatus={this.props.updateStatus}
-                savePhoto={this.props.savePhoto}
-                saveProfile={this.props.saveProfile}
-            />
+            <>
+                {this.props.isFetching ? <Preloader/> :
+                    < Profile
+                        isOwner={!this.props.match.params.userId}
+                        {...this.props}
+                        profile={this.props.profile}
+                        status={this.props.status}
+                        updateStatus={this.props.updateStatus}
+                        savePhoto={this.props.savePhoto}
+                        saveProfile={this.props.saveProfile}
+                    />
+                }
+            </>
 
 
         )
@@ -60,7 +65,8 @@ const mapStateToProps = (state: any) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    isFetching: state.app.isFetching
 
 
 })

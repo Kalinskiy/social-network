@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Avatar, ProfileType} from "./row1/Avatar/Avatar";
 import MyPostsContainer from "./row2/MyPosts/MyPostsContainer";
 import s from './Profile.module.css'
@@ -20,6 +20,7 @@ function Profile(props: PropsType) {
 
     return (
         <div className={s.container}>
+
             <div className={s.row1}>
                 <Avatar profile={props.profile}
                         isOwner={props.isOwner}

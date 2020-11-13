@@ -30,7 +30,7 @@ let Pagination: React.FC<PaginatorType> = ({totalItemsCount, pageSize,
     const rightPortionPageNumber = portionNumber * portionSize
     return <div className={cn(s.paginator)}>
         { portionNumber > 1 &&
-        <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button> }
+        <span className={s.prev} onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</span> }
 
         {pages
             .filter(p => p >= leftPortionPageNumber && p<=rightPortionPageNumber)
@@ -44,7 +44,7 @@ let Pagination: React.FC<PaginatorType> = ({totalItemsCount, pageSize,
                              }}>{p}</span>
             })}
         { portionCount > portionNumber &&
-        <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button> }
+        <span className={s.next} onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</span> }
 
 
     </div>

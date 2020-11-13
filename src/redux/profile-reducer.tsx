@@ -3,6 +3,7 @@ import {IPost} from "../components/Profile/row2/MyPosts/MyPosts";
 import {profileAPI, usersAPI} from "../api/api";
 import {PostType} from "../components/Profile/row2/MyPosts/Post/Post";
 import {stopSubmit} from "redux-form";
+import {toggleIsFetching} from "./app-reducer";
 
 const ADD_POST = 'ADD-POST';
 const DELETE_POST = 'DELETE_POST';
@@ -170,25 +171,32 @@ export const setPhotoSuccess = (photos: any) => ({type: SAVE_PHOTO_SUCCESS, phot
 //----------------------------------------------------------------------------------------------------------------------
 //Thunks
 export const getUserProfile = (userId: any) => async (dispatch: any) => {
+    dispatch(toggleIsFetching(true));
     const response = await usersAPI.getProfile(userId);
-    console.log(response)
+    dispatch(toggleIsFetching(false));
     dispatch(setUserProfile(response.data));
 }
 export const getStatus = (userId: number) => async (dispatch: any) => {
+    dispatch(toggleIsFetching(true));
     const response = await profileAPI.getStatus(userId)
+    dispatch(toggleIsFetching(false));
     dispatch(setStatus(response.data));
 
 }
 export const updateStatus = (status: string) => async (dispatch: any) => {
+    dispatch(toggleIsFetching(true));
     const response = await profileAPI.updateStatus(status)
+    dispatch(toggleIsFetching(false));
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
 }
 export const savePhoto = (file: any) => async (dispatch: any) => {
+    dispatch(toggleIsFetching(true));
     const response = await profileAPI.savePhoto(file)
-
+    dispatch(toggleIsFetching(false));
     try {
+
         if (response.data.resultCode === 0) {
             dispatch(setPhotoSuccess(response.data.data.photos));
         }
@@ -198,9 +206,10 @@ export const savePhoto = (file: any) => async (dispatch: any) => {
     }
 }
 export const saveProfile = (profile: any) => async (dispatch: any, getState: any) => {
+    dispatch(toggleIsFetching(true));
     const userId = getState().auth.userId
     const response = await profileAPI.saveProfile(profile)
-
+    dispatch(toggleIsFetching(false));
     if (response.data.resultCode === 0) {
         dispatch(getUserProfile(userId));
     } else {

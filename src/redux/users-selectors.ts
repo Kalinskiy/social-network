@@ -29,7 +29,7 @@ export const getCurrentPage = (state: any) => {
 }
 
 export const getIsFetching = (state: any) => {
-    return state.usersPage.isFetching
+    return state.app.isFetching
 }
 export const getFollowingInProgress = (state: any) => {
     return state.usersPage.followingInProgress

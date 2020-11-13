@@ -44,6 +44,7 @@ export const Friends = () => {
             <div className={style.friends}>
                 <span>Friends</span>
                 {friendsComponents}
+
             </div>
 
             <div className={style.onlineFriends}>
@@ -59,7 +60,7 @@ export const Friends = () => {
 type FriendIconPropsType = {
     photo: string
     name: string
-    id:number
+    id: number
 }
 
 
@@ -67,9 +68,10 @@ export const FriendIcon = (props: FriendIconPropsType) => {
 
     return (
         <div className={style.friendContainer}>
-
-            <img src={props.photo || userPhoto}/>
-            <div className={style.name}>{props.name}</div>
+            <NavLink to={`/profile/${props.id}`}>
+                <img src={props.photo || userPhoto}/>
+                <div className={style.name}>{props.name}</div>
+            </NavLink>
 
         </div>
     )

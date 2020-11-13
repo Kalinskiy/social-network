@@ -10,10 +10,10 @@ import React from "react";
 type PropsType = {
     profile: ProfileType
     onSubmit: (profile: ProfileType) => void
-    onCancel:(editMode:boolean)=>void
+    onCancel: (editMode: boolean) => void
 }
 
-export const ProfileDataForm = (props:any) => {
+export const ProfileDataForm = (props: any) => {
 
     const dispatch = useDispatch()
 
@@ -73,8 +73,8 @@ export const ProfileDataForm = (props:any) => {
                 />
             </div>
 
-            <div className={style.element}>
-                <div className={style.title}>Press if you're looking for a job</div>
+            <div className={`${style.element} ${style.checkBoxElement}`}>
+                <div className={style.title}>Are you looking for job?</div>
                 <input className={style.checkbox} type={'checkbox'}
                        {...formik.getFieldProps('lookingForAJob')}
                 />
@@ -123,7 +123,9 @@ export const ProfileDataForm = (props:any) => {
             </div>
 
 
-            <button className={style.button}>Send</button>
+            <div className={style.button}>
+                <button >Send</button>
+            </div>
         </form>
     )
 }
