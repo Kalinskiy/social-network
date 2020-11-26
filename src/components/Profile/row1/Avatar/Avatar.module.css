@@ -29,7 +29,7 @@
 
 }
 
-.photoBlock input[type='file'] { /* скрывает надпись файл не выбран*/
+.photoBlock input[type="file"] { /* скрывает надпись файл не выбран*/
     display: none;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .contactItem:hover:after {
-    content: '';
+    content: "";
     width: 100%;
     height: 1px;
     background-color: rgb(231, 232, 236);

@@ -1,6 +1,6 @@
 import React, {Dispatch} from "react";
 import {
-    sendMessageCreator,
+    sendMessageCreatorAC,
     sendMessageCreatorType,
     updateNewMessageBodyCreatorType
 } from "../../redux/dialogs-reducer";
@@ -22,7 +22,7 @@ let mapStateToProps = (state: AppStoreType) => {
 let mapDispatchToProps = (dispatch: Dispatch<mapDispatchToPropsType>) => {
     return {
         sendMessage: (newMessageBody: string) => {
-            dispatch(sendMessageCreator(newMessageBody));
+            dispatch(sendMessageCreatorAC(newMessageBody));
         },
 
 

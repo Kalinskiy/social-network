@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import style from './Modal.module.scss'
+import style from "./Modal.module.scss"
 
 type ModalAddPackType = {
     modalActive: boolean

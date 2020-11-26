@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {Avatar, ProfileType} from "./row1/Avatar/Avatar";
-import MyPostsContainer from "./row2/MyPosts/MyPostsContainer";
+import React from 'react';
+import {Avatar, ProfileType} from './row1/Avatar/Avatar';
+import MyPostsContainer from './row2/MyPosts/MyPostsContainer';
 import s from './Profile.module.css'
-import {Friends} from "./row1/Friends/Friends";
-import {AboutProfile} from "./row2/AboutProfile/AboutProfile";
+import {Friends} from './row1/Friends/Friends';
+import {AboutProfile} from './row2/AboutProfile/AboutProfile';
 
 
 export type PropsType = {

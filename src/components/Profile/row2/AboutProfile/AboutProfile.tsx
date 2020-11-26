@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import s from './AboutProfile.module.css'
+import s from "./AboutProfile.module.css"
 import ProfileStatusWithHooks from "./ProfileInfo/Status/ProfileStatusWithHooks";
 import {updateStatus} from "../../../../redux/profile-reducer";
 import {ProfileData} from "./ProfileData/ProfileData";

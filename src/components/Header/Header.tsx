@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import s from './Header.module.css';
+import React, {useEffect} from "react";
+import s from "./Header.module.css";
 import {NavLink} from "react-router-dom";
-import logo from '../../assets/icons/logo.png'
+import logo from "../../assets/icons/logo.png"
 import {useSelector} from "react-redux";
 
 const Header = (props: any) => {
@@ -11,21 +11,21 @@ const Header = (props: any) => {
 
     }, [props.logout])
 
-    const logInfo = 'ID ' + props.userId + ' ' + props.login
+    const logInfo = "ID " + props.userId + " " + props.login
     return (
 
         <header className={s.header}>
             <div className={s.logo}>
-                <NavLink to={'/profile'}>
+                <NavLink to={"/profile"}>
                     <img src={logo}/>
                 </NavLink>
-                {/*{isAuth && <Redirect to={'/login'}/>}*/}
+                {/*{isAuth && <Redirect to={"/login"}/>}*/}
             </div>
             <div className={s.loginBlock}>
                 {props.isAuth ? <div>
                         <button onClick={props.logout}>Log out</button>
                     </div> :
-                    <NavLink to={'/login'}>
+                    <NavLink to={"/login"}>
                         <button>Login</button>
                     </NavLink>}
             </div>

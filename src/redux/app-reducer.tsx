@@ -1,29 +1,36 @@
-import {getAuthUserData} from "./auth-reducer";
+import {getAuthUserData} from './auth-reducer';
 
-const INiTIALIZED_SUCCESS = 'INiTIALIZED_SUCCESS';
 
-let initialState = {
+const initialState = {
     initialized: false,
-    isFetching:false
+    isFetching: false
 }
-export type ToggleIsFetchingType = {
-    type: 'TOGGLE_IS_FETCHING'
-    isFetching: boolean
-}
+
 //----------------------------------------------------------------------------------------------------------------------
 //Types
-type authStateType = {
+type InitialStateType = {
     initialized: boolean
     isFetching: boolean
 }
 export const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+export const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+export type ToggleIsFetchingType = {
+    type: typeof TOGGLE_IS_FETCHING
+    isFetching: boolean
+}
+export type InitializedType = {
+    type: typeof INITIALIZED_SUCCESS,
+    initialized: boolean
+}
+type ActionType = ToggleIsFetchingType | InitializedType
+
 //----------------------------------------------------------------------------------------------------------------------
 //Reducer
-const appReducer = (state: authStateType = initialState, action: any) => {
+const appReducer = (state: InitialStateType = initialState, action: ActionType):InitialStateType => {
 
     switch (action.type) {
 
-        case INiTIALIZED_SUCCESS:
+        case INITIALIZED_SUCCESS:
             return {
                 ...state,
                 initialized: true
@@ -31,7 +38,6 @@ const appReducer = (state: authStateType = initialState, action: any) => {
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
-
         default:
             return state;
     }
@@ -39,18 +45,17 @@ const appReducer = (state: authStateType = initialState, action: any) => {
 
 //----------------------------------------------------------------------------------------------------------------------
 //Actions
-export const setInitializedSuccess = () => ({type: INiTIALIZED_SUCCESS});
-export const toggleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const setInitializedSuccessAC = (initialized: boolean) => ({type: INITIALIZED_SUCCESS, initialized});
+export const toggleIsFetchingAC = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching});
 //----------------------------------------------------------------------------------------------------------------------
 //Thunks
-export const initializeApp = () => (dispatch: any) => {
-    let promise = dispatch(getAuthUserData())
-     promise.then(()=>{
-        dispatch(setInitializedSuccess())
-    })
+export const initializeApp = () => async (dispatch: any) => {
+    let res =  await dispatch(getAuthUserData())
+    try{
+        dispatch(setInitializedSuccessAC(true))
+    }
+    catch (e) {
 
-
+    }
 }
-
-
 export default appReducer;

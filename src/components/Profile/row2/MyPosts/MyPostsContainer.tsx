@@ -1,7 +1,7 @@
-import React, {Dispatch} from 'react';
-import {addLikeAC, addPostActionCreator} from '../../../../redux/profile-reducer';
-import MyPosts from './MyPosts';
-import {connect} from 'react-redux';
+import React, {Dispatch} from "react";
+import {addLikeAC, addPostAC} from "../../../../redux/profile-reducer";
+import MyPosts from "./MyPosts";
+import {connect} from "react-redux";
 import {reset} from "redux-form";
 
 
@@ -17,8 +17,8 @@ let mapStateToProps = (state:any) => {
 let mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
         addPost: (newPostText: string) => {
-            dispatch(addPostActionCreator(newPostText));
-           dispatch(reset('profileAddNewPostForm'))
+            dispatch(addPostAC(newPostText));
+           dispatch(reset("profileAddNewPostForm"))
         },
         addLike: (id: number) => {
             dispatch(addLikeAC(id))

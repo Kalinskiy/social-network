@@ -1,44 +1,58 @@
 import {newsAPI} from "../api/api";
-import {toggleIsFetching} from "./app-reducer";
+import {toggleIsFetchingAC} from "./app-reducer";
 
-
-const SET_NEWS = 'SET_NEWS';
-
-export type setNewsType = {
-    type: 'SET_USERS'
-    users: Array<any>
+const initialState = {
+    news: Array<NewType>() //?
+}
+//----------------------------------------------------------------------------------------------------------------------
+//Types
+const SET_NEWS = "SET_NEWS";
+type SetNewsActionType = {
+    type: typeof SET_NEWS
+    payload: {
+        news: Array<NewType>
+    }
+}
+type NewSourceType = {
+    id: string
+    name: string
+}
+type NewType = {
+    author: string
+    content: string
+    description: string
+    publishedAt: string
+    source: NewSourceType
+    title: string
+    url: string
+    urlToImage: string
 }
 
-let initialState = {
-    news: []
+type InitialStateType = typeof initialState
 
-}
 
-export const newsReducer = (state = initialState, action: any) => {
-
+export const newsReducer = (state: InitialStateType = initialState, action: SetNewsActionType) => {
     switch (action.type) {
-
         case SET_NEWS:
             return {
                 ...state,
-                news: action.news
+                news: action.payload.news
             }
-
         default:
             return state;
     }
 }
 
 
-export const setNews = (news: Array<any>) => ({type: SET_NEWS, news});
-
+export const setNewsAC = (news: Array<any>):SetNewsActionType => ({type: SET_NEWS, payload: {news}});
 
 export const getNews = () => {
     return async (dispatch: any) => {
-        dispatch(toggleIsFetching(true));
-        let data = await newsAPI.getnews()
-        dispatch(setNews(data.data.articles));
-        dispatch(toggleIsFetching(false));
+        dispatch(toggleIsFetchingAC(true));
+        const data = await newsAPI.getnews()
+        console.log(data)
+        dispatch(setNewsAC(data.data.articles));
+        dispatch(toggleIsFetchingAC(false));
     }
 }
 

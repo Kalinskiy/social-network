@@ -8,8 +8,8 @@ const AddMessageForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div><Field component={TextArea}
-                        name={'newMessageBody'}
-                        placeholder={'Enter your message here'}
+                        name={"newMessageBody"}
+                        placeholder={"Enter your message here"}
                         validate={[required, maxLength50]}
             /></div>
             <div>
@@ -19,4 +19,4 @@ const AddMessageForm = (props: any) => {
         </form>
     )
 }
-export default reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
+export default reduxForm({form: "dialogAddMessageForm"})(AddMessageForm)

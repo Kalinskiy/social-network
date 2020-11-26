@@ -1,10 +1,10 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from "react";
+import {connect} from "react-redux";
 import {follow, requestUsers, setCurrentPage, toggleFollowingProgress, unfollow} from "../../redux/users-reducer";
 import Users, {UserType} from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {AppStoreType} from "../../redux/redux-store";
-import {compose} from 'redux';
+import {compose} from "redux";
 import {
     getCurrentPage,
     getFollowingInProgress,
@@ -56,6 +56,9 @@ class UsersContainer extends React.Component<any> {
         return <>
             {this.props.isFetching ? <Preloader/> :
                 <>
+                    <Pagination pageSize={this.props.pageSize} currentPage={this.props.currentPage} onPageChanged={this.onPageChanged}
+                                totalItemsCount={this.props.totalUsersCount}/>
+
                     <Users totalUsersCount={this.props.totalUsersCount}
                            pageSize={this.props.pageSize}
                            currentPage={this.props.currentPage}
@@ -72,8 +75,7 @@ class UsersContainer extends React.Component<any> {
 
                 </>
             }
-            <Pagination pageSize={this.props.pageSize} currentPage={this.props.currentPage} onPageChanged={this.onPageChanged}
-                        totalItemsCount={this.props.totalUsersCount}/>
+
         </>
 
     }

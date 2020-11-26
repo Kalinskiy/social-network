@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import s from "../../../row1/Avatar/Avatar.module.css";
 import edit from "../../../../../assets/icons/edit.png";
-import vkImg from '../../../../../assets/icons/contacts/vk.png'
-import facebookImg from '../../../../../assets/icons/contacts/facebook.png'
-import instagramImg from '../../../../../assets/icons/contacts/instagram.png'
-import githubImg from '../../../../../assets/icons/contacts/github.png'
-import youtubeImg from '../../../../../assets/icons/contacts/youtube.png'
+import vkImg from "../../../../../assets/icons/contacts/vk.png"
+import facebookImg from "../../../../../assets/icons/contacts/facebook.png"
+import instagramImg from "../../../../../assets/icons/contacts/instagram.png"
+import githubImg from "../../../../../assets/icons/contacts/github.png"
+import youtubeImg from "../../../../../assets/icons/contacts/youtube.png"
 
 
 type ProfileDataPropsType = {
@@ -15,7 +15,7 @@ type ProfileDataPropsType = {
 }
 
 export const ProfileData: React.FC<ProfileDataPropsType> = (props: ProfileDataPropsType) => {
-    console.log(props.profile.contacts)
+
 
     const [isBlockOpen, setIsBlockOpen] = useState(true)
 
@@ -34,8 +34,8 @@ export const ProfileData: React.FC<ProfileDataPropsType> = (props: ProfileDataPr
                                 <img src={edit} alt=""/>
                             </div>
                         </div>}
-                        {isBlockOpen && 'Hide full information'}
-                        {!isBlockOpen && 'Show full information'}
+                        {isBlockOpen && "Hide full information"}
+                        {!isBlockOpen && "Show full information"}
                     </div>
                     {
                         isBlockOpen &&
@@ -56,28 +56,28 @@ export const ProfileData: React.FC<ProfileDataPropsType> = (props: ProfileDataPr
                             <div className={s.contacts}>
                                 <div className={s.contactItem}>
                                     <a href={props.profile.contacts.vk} target="_blank">
-                                        <img src={vkImg} alt=''/>
+                                        <img src={vkImg} alt=""/>
                                     </a>
                                 </div>
                                 <div className={s.contactItem}>
                                     <a href={props.profile.contacts.facebook} target="_blank">
-                                        <img src={facebookImg} alt=''/>
+                                        <img src={facebookImg} alt=""/>
                                     </a>
                                 </div>
                                 <div className={s.contactItem}>
                                     <a href={props.profile.contacts.instagram} target="_blank">
                                         <img src={instagramImg}
-                                             alt=''/>
+                                             alt=""/>
                                     </a>
                                 </div>
                                 <div className={s.contactItem}>
                                     <a href={props.profile.contacts.github} target="_blank">
-                                        <img src={githubImg} alt=''/>
+                                        <img src={githubImg} alt=""/>
                                     </a>
                                 </div>
                                 <div className={s.contactItem}>
-                                    <a href='#' target="_blank">
-                                        <img src={youtubeImg} alt=''/>
+                                    <a href="#" target="_blank">
+                                        <img src={youtubeImg} alt=""/>
                                     </a>
                                 </div>
 

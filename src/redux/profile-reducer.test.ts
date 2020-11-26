@@ -1,17 +1,17 @@
-import profileReducer, {addPostActionCreator, deletePost} from "./profile-reducer";
+import profileReducer, {addPostAC, deletePostAC} from "./profile-reducer";
 import React from "react";
 
 let initialState:any = {
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 1},
-        {id: 2, message: 'It`s my first post', likesCount: 5},
-        {id: 3, message: 'Third one', likesCount: 9},
+        {id: 1, message: "Hi, how are you?", likesCount: 1},
+        {id: 2, message: "It`s my first post", likesCount: 5},
+        {id: 3, message: "Third one", likesCount: 9},
     ],
 
 }
-test('length of posts should be incremented', () => {
+test("length of posts should be incremented", () => {
     // 1. start test data
-    let action:any = addPostActionCreator('example test')
+    let action:any = addPostAC("example test")
 
     // 2. action
     let newState = profileReducer(initialState, action)
@@ -19,19 +19,19 @@ test('length of posts should be incremented', () => {
    expect(newState.posts.length).toBe(4)
 
 });
-test('message of new post should be "example test" ', () => {
+test("message of new post should be "example test" ", () => {
     // 1. start test data
-    let action:any = addPostActionCreator('example test')
+    let action:any = addPostAC("example test")
 
     // 2. action
     let newState = profileReducer(initialState, action)
     //3. expectation
 
-   expect(newState.posts[3].message).toBe('example test')
+   expect(newState.posts[3].message).toBe("example test")
 });
-test('after removing length of message should be decremented" ', () => {
+test("after removing length of message should be decremented" ", () => {
     // 1. start test data
-    let action:any = deletePost(1)
+    let action:any = deletePostAC(1)
 
     // 2. action
     let newState = profileReducer(initialState, action)

@@ -1,5 +1,4 @@
-import {DialogItemType} from "../components/Dialogs/DialogItem/DialogItem";
-import {MessageType} from "../components/Dialogs/Message/Message";
+import {MessageType} from '../components/Dialogs/Message/Message';
 import DimychPhoto from '../assets/dialogs/dimych.jpg'
 import valeraPhoto from '../assets/dialogs/valera.jpg'
 import valerastPhoto from '../assets/dialogs/valerast.jpg'
@@ -8,15 +7,14 @@ import artemPhoto from '../assets/dialogs/artem.jpg'
 import ignatPhoto from '../assets/dialogs/ignat.jpg'
 
 
-const SEND_MESSAGE = 'SEND-MESSAGE';
-let initialState = {
+const initialState = {
     dialogs: [
-        {id: 1, name: 'Dimych', photo:DimychPhoto},
-        {id: 2, name: 'Valera', photo:valeraPhoto},
-        {id: 3, name: 'Sveta', photo:svetaPhoto},
-        {id: 4, name: 'Artem', photo:artemPhoto},
-        {id: 5, name: 'Valera', photo:valerastPhoto},
-        {id: 6, name: 'Ignat', photo:ignatPhoto},
+        {id: 1, name: 'Dimych', photo: DimychPhoto},
+        {id: 2, name: 'Valera', photo: valeraPhoto},
+        {id: 3, name: 'Sveta', photo: svetaPhoto},
+        {id: 4, name: 'Artem', photo: artemPhoto},
+        {id: 5, name: 'Valera', photo: valerastPhoto},
+        {id: 6, name: 'Ignat', photo: ignatPhoto},
     ],
     messages: [
         {id: 1, message: 'Hi'},
@@ -28,49 +26,56 @@ let initialState = {
     ],
 
 };
+
 //----------------------------------------------------------------------------------------------------------------------
 //Types
-type dialogsStateType = {
+export type DialogItemType = {
+    id: number
+    name: string
+    photo: string
+}
+
+export type InitialStateType = {
     dialogs: Array<DialogItemType>,
     messages: Array<MessageType>
-
 }
+const SEND_MESSAGE = 'SEND-MESSAGE';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+
 export type sendMessageCreatorType = {
-    newMessageBody: string
-    type: 'SEND-MESSAGE'
+    type: typeof SEND_MESSAGE
+    payload: {
+        newMessageBody: string
+    }
 }
 export type updateNewMessageBodyCreatorType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY'
+    type: typeof UPDATE_NEW_MESSAGE_BODY
     body: string
 }
 type ActionsType = sendMessageCreatorType | updateNewMessageBodyCreatorType
 
 //----------------------------------------------------------------------------------------------------------------------
 //Reducer
-const dialogsReducer = (state: dialogsStateType = initialState, action: ActionsType): dialogsStateType => {
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
 
 
     switch (action.type) {
-
-
         case SEND_MESSAGE:
-            let body = action.newMessageBody;
+            const body = action.payload.newMessageBody;
             return {
                 ...state,
                 messages: [...state.messages, {id: 6, message: body}]
             };
         default:
             return state;
-
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 //Actions
-export const sendMessageCreator = (newMessageBody: string): sendMessageCreatorType => ({
+export const sendMessageCreatorAC = (newMessageBody: string): sendMessageCreatorType => ({
     type: SEND_MESSAGE,
-    newMessageBody
+    payload: {newMessageBody}
 });
-
 
 export default dialogsReducer;

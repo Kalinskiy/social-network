@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import s from './Paginator.module.css';
-import cn from 'classnames'
+import React, {useState} from "react"
+import s from "./Paginator.module.css"
+import cn from "classnames"
 
 
 export type PaginatorType = {

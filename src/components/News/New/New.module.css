@@ -20,7 +20,7 @@
     width: 100%;
     display: block;
     background-color: rgb(74, 118, 168);
-    content: '';
+    content: "";
     border-radius: 10px;
 }
 

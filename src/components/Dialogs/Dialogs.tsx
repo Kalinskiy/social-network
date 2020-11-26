@@ -1,5 +1,5 @@
 import React from "react";
-import s from './Dialogs.module.css'
+import s from "./Dialogs.module.css"
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 
@@ -23,7 +23,7 @@ export const Dialogs = (props: any) => {
 
     };
     if (!props.isAuth) {
-        return <Redirect to={'/login'}/>
+        return <Redirect to={"/login"}/>
     }
 
     return (

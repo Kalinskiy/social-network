@@ -18,35 +18,35 @@ let store:any = {
     _state: {
         profilePage: {
             posts: [
-                {id: 1, message: 'Hi, how are you?', likesCount: '1'},
-                {id: 2, message: 'It`s my first post', likesCount: '5'},
-                {id: 3, message: 'Third one', likesCount: '9'},
+                {id: 1, message: "Hi, how are you?", likesCount: "1"},
+                {id: 2, message: "It`s my first post", likesCount: "5"},
+                {id: 3, message: "Third one", likesCount: "9"},
             ],
-            newPostText: 'it-kamasutra'
+            newPostText: "it-kamasutra"
         },
         dialogsPage: {
             dialogs: [
-                {id: 1, name: 'Dimych'},
-                {id: 2, name: 'Sasha'},
-                {id: 3, name: 'Andrey'},
-                {id: 4, name: 'Sveta'},
-                {id: 5, name: 'Victor'},
-                {id: 6, name: 'Valera'}
+                {id: 1, name: "Dimych"},
+                {id: 2, name: "Sasha"},
+                {id: 3, name: "Andrey"},
+                {id: 4, name: "Sveta"},
+                {id: 5, name: "Victor"},
+                {id: 6, name: "Valera"}
             ],
             message: [
-                {id: 1, message: 'Hello'},
-                {id: 2, message: 'How are you doing?'},
-                {id: 3, message: 'YO YO YO'},
-                {id: 4, message: 'here is too'},
-                {id: 5, message: 'Here is something else'},
-                {id: 6, message: 'Yo'},
+                {id: 1, message: "Hello"},
+                {id: 2, message: "How are you doing?"},
+                {id: 3, message: "YO YO YO"},
+                {id: 4, message: "here is too"},
+                {id: 5, message: "Here is something else"},
+                {id: 6, message: "Yo"},
             ],
-            newMessageBody: '',
+            newMessageBody: "",
         },
 
     },
     _callSubscriber(state: any) {
-        console.log('state has been changed')
+        console.log("state has been changed")
     },
     getState() {
 

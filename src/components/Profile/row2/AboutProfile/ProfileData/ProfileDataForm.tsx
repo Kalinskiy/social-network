@@ -3,7 +3,7 @@ import {ProfileType} from "../../../row1/Avatar/Avatar";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {saveProfile} from "../../../../../redux/profile-reducer";
-import style from './ProfileDataForm.module.css'
+import style from "./ProfileDataForm.module.css"
 import React from "react";
 
 
@@ -60,65 +60,65 @@ export const ProfileDataForm = (props: any) => {
         <form onSubmit={formik.handleSubmit}>
 
             <div className={style.element}>
-                <div className={style.title}>Change you'r name</div>
-                <input className={style.input} type={'text'}
-                       {...formik.getFieldProps('FullName')}
+                <div className={style.title}>Change you"r name</div>
+                <input className={style.input} type={"text"}
+                       {...formik.getFieldProps("FullName")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>About me</div>
                 <textarea
-                    {...formik.getFieldProps('AboutMe')}
+                    {...formik.getFieldProps("AboutMe")}
                 />
             </div>
 
             <div className={`${style.element} ${style.checkBoxElement}`}>
                 <div className={style.title}>Are you looking for job?</div>
-                <input className={style.checkbox} type={'checkbox'}
-                       {...formik.getFieldProps('lookingForAJob')}
+                <input className={style.checkbox} type={"checkbox"}
+                       {...formik.getFieldProps("lookingForAJob")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>Describe your skills</div>
                 <textarea
-                    {...formik.getFieldProps('lookingForAJobDescription')}
+                    {...formik.getFieldProps("lookingForAJobDescription")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>Instagram</div>
-                <input className={style.input} type={'text'}
-                       {...formik.getFieldProps('instagram')}
+                <input className={style.input} type={"text"}
+                       {...formik.getFieldProps("instagram")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>Twitter</div>
-                <input className={style.input} type={'text'}
-                       {...formik.getFieldProps('twitter')}
+                <input className={style.input} type={"text"}
+                       {...formik.getFieldProps("twitter")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>LinkedIn</div>
-                <input className={style.input} type={'text'}
-                       {...formik.getFieldProps('linkedIn')}
+                <input className={style.input} type={"text"}
+                       {...formik.getFieldProps("linkedIn")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>Facebook</div>
-                <input className={style.input} type={'text'}
-                       {...formik.getFieldProps('facebook')}
+                <input className={style.input} type={"text"}
+                       {...formik.getFieldProps("facebook")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>GitHub</div>
-                <input className={style.input} type={'text'}
-                       {...formik.getFieldProps('gitHub')}
+                <input className={style.input} type={"text"}
+                       {...formik.getFieldProps("gitHub")}
                 />
             </div>
 

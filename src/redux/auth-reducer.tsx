@@ -1,27 +1,25 @@
-import {authAPI, securityAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {authAPI, securityAPI} from '../api/api';
+import {stopSubmit} from 'redux-form';
+import {Dispatch} from 'redux';
 
-const SET_USER_DATA = 'auth/SET_USER_DATA';
-const GET_CAPTCHA_URL_SUCCESS = 'auth/GET_CAPTCHA_URL_SUCCESS';
-let initialState = {
-    userId: null,
-    email: null,
-    login: null,
+
+const initialState = {
+    userId: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false,
-    captchaUrl: null //if null then captcha isn`t required
+    captchaUrl: null as string | null //if null then captcha isn`t required
 }
+
 //----------------------------------------------------------------------------------------------------------------------
 //Types
-type authStateType = {
-    userId: null | number
-    email: null | string
-    login: null | string
-    isAuth: boolean
-    captchaUrl: null | string
-}
+const SET_USER_DATA = 'auth/SET_USER_DATA';
+const GET_CAPTCHA_URL_SUCCESS = 'auth/GET_CAPTCHA_URL_SUCCESS';
+
+export type initialStateType = typeof initialState
 
 export type SetUserDataType = {
-    type: 'auth/SET_USER_DATA'
+    type: typeof SET_USER_DATA
     payload: {
         userId: number | null,
         email: string | null,
@@ -30,7 +28,7 @@ export type SetUserDataType = {
     },
 }
 export type GetCaptchaType = {
-    type: 'auth/GET_CAPTCHA_URL_SUCCESS'
+    type: typeof GET_CAPTCHA_URL_SUCCESS
     payload: {
         captchaUrl: string | null,
     },
@@ -38,7 +36,7 @@ export type GetCaptchaType = {
 type ActionType = SetUserDataType | GetCaptchaType
 //----------------------------------------------------------------------------------------------------------------------
 //Reducer
-const authReducer = (state: authStateType = initialState, action: ActionType): authStateType => {
+const authReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
 
     switch (action.type) {
 
@@ -48,6 +46,7 @@ const authReducer = (state: authStateType = initialState, action: ActionType): a
                 ...state,
                 ...action.payload,
 
+
             }
         default:
             return state;
@@ -56,22 +55,22 @@ const authReducer = (state: authStateType = initialState, action: ActionType): a
 
 //----------------------------------------------------------------------------------------------------------------------
 //Actions
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
+export const setAuthUserDataAC = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetUserDataType => ({
     type: SET_USER_DATA,
     payload: {userId, email, login, isAuth}
 });
-export const getCaptchaUrlSuccess = (captchaUrl: any) => ({
+export const getCaptchaUrlSuccessAC = (captchaUrl: any): GetCaptchaType => ({
     type: GET_CAPTCHA_URL_SUCCESS,
     payload: {captchaUrl}
 });
 
 //----------------------------------------------------------------------------------------------------------------------
 //Thunks
-export const getAuthUserData = () => async (dispatch: any) => {
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
     const response = await authAPI.me()
     if (response.data.resultCode === 0) {
         let {email, id, login} = response.data.data;
-        dispatch(setAuthUserData(id, email, login, true));
+        dispatch(setAuthUserDataAC(id, email, login, true));
     }
 }
 export const login = (email: string, password: string, rememberMe: boolean, captcha: any) => async (dispatch: any) => {
@@ -86,22 +85,25 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
             ? response.data.messages[0]
             : 'email or password is not valid'
 
-        dispatch(stopSubmit('login', {_error: message})) //диспатчим AC который пришел из redux-form  библиотеки
-        //1 параметр - название формы
+        dispatch(stopSubmit('login', {_error: message})) // dispatch AC which comes from redux-form library
+        //1st param -  form name
     }
 }
-export const getCaptchaUrl = () => async (dispatch: any) => {
+export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
     const response = await securityAPI.getCaptchaUrl()
-    const captchaUrl = response.data.url
-    dispatch(getCaptchaUrlSuccess(captchaUrl))
+    try {
+        dispatch(getCaptchaUrlSuccessAC(response.data.url))
+    } catch (e) {
+
+    }
+
 
 }
 
-export const logout = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+export const logout = () => async (dispatch: Dispatch) => {
     const response = await authAPI.logout()
-    debugger
     if (response.data.resultCode === 0) {
-        dispatch(setAuthUserData(null, null, null, false))
+        dispatch(setAuthUserDataAC(null, null, null, false))
     }
 }
 

@@ -1,20 +1,8 @@
-import React from 'react';
-import Pagination from "../common/Paginator/Pagination";
+import React from "react";
+import style from "./Users.module.css"
+import {UserType} from "../../types/types";
 import User from "./User/User";
-import style from './Users.module.css'
 
-
-export type UserType = {
-    photos: {
-        small: string,
-        large: string,
-    }
-    unfollow: boolean
-    follow: boolean
-    name: string
-    status: string
-    id: number
-}
 
 export type UsersTypeProps = {
     pageSize: number,
@@ -41,10 +29,6 @@ let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...p
                                         follow={props.follow}
                 />
             )}
-        {/*<div className={style.paginator}>*/}
-        {/*    <Pagination pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged}*/}
-        {/*                totalItemsCount={totalUsersCount}/>*/}
-        {/*</div>*/}
     </div>
 }
 

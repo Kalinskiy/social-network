@@ -1,31 +1,9 @@
-import React, {ChangeEvent, useRef} from 'react';
-import s from './Avatar.module.css';
+import React, {ChangeEvent, useRef} from "react";
+import s from "./Avatar.module.css";
 import Preloader from "../../../common/Preloader/Preloader";
-import userPhoto from '../../../../assets/images/user.png'
+import userPhoto from "../../../../assets/images/user.png"
 
-export type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: PhotosType
-    aboutMe: string
-}
-export type PhotosType = {
-    small: string | null
-    large: string | null
-}
-export type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
+
 
 type PropsType = {
     profile: any
@@ -59,7 +37,7 @@ export const Avatar = (props: PropsType) => {
                     }
                     {props.isOwner && <button onClick={() => inRef && inRef.current && inRef.current.click()}>Change</button>}
                     <span className={s.privateProfile}>
-                        {props.isOwner ? 'Your profile is private' : 'His profile is private'}
+                        {props.isOwner ? "Your profile is private" : "His profile is private"}
                     </span>
                 </div>
     )
