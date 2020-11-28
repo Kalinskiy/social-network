@@ -1,12 +1,13 @@
 import React from 'react';
-import {Avatar, ProfileType} from './row1/Avatar/Avatar';
+import {Avatar} from './row1/Avatar/Avatar';
 import MyPostsContainer from './row2/MyPosts/MyPostsContainer';
 import s from './Profile.module.css'
 import {Friends} from './row1/Friends/Friends';
 import {AboutProfile} from './row2/AboutProfile/AboutProfile';
+import {ProfileType} from "../../types/types";
 
 
-export type PropsType = {
+ type PropsType = {
 
     profile: ProfileType
     status: string

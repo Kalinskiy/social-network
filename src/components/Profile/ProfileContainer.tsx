@@ -1,7 +1,6 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {AppStoreType} from "../../redux/redux-store";
 import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
@@ -9,7 +8,7 @@ import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import Preloader from "../common/Preloader/Preloader";
 
 
-export type PropsType = {
+type PropsType = {
     // profilePage: ProfileType
     //  dispatch:any
     store: any

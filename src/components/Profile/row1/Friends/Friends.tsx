@@ -1,42 +1,35 @@
 import React, {useEffect} from "react";
 import style from "./Friends.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {AppStoreType} from "../../../../redux/redux-store";
+import {AppStateType} from "../../../../redux/redux-store";
 import {getFriends, UsersType} from "../../../../redux/friends-reducer";
 import userPhoto from "../../../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
 
 
 export const Friends = () => {
-
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getFriends())
     }, [])
 
-    const friends = useSelector<AppStoreType, UsersType[]>(state => state.friends.friends)
+    const friends = useSelector<AppStateType, Array<UsersType>>(state => state.friends.friends)
+    const onlineFriends = useSelector<AppStateType, Array<UsersType>>(state => state.friends.onlineFriends)
 
-    const onlineFriends = useSelector<AppStoreType, UsersType[]>(state => state.friends.onlineFriends)
+    const friendsComponents = friends.map((element) =>
+        <FriendIcon
+            name={element.name}
+            photo={element.photos.small}
+            id={element.id}
+            key={element.id}/>)
 
-    const friendsComponents = friends.map((element) => <FriendIcon name={element.name}
-                                                                   photo={element.photos.small}
-                                                                   id={element.id}
-                                                                   key={element.id}/>)
-
-    const onlineFriendsComponent = onlineFriends.map((element) => <FriendIcon name={element.name}
-                                                                              photo={element.photos.small}
-                                                                              id={element.id}
-                                                                              key={element.id}
-    />)
-
-    /*const onlineFriendsComponents = onlineFriends.map((element) => {
-        return (
-            <FriendIcon name={element.name}
-                        photo={element.photos.small}
-            />
-        )
-    })*/
+    const onlineFriendsComponent = onlineFriends.map((element) =>
+        <FriendIcon
+            name={element.name}
+            photo={element.photos.small}
+            id={element.id} key={element.id}
+        />)
 
     return (
         <div className={style.container}>
@@ -58,11 +51,10 @@ export const Friends = () => {
 
 
 type FriendIconPropsType = {
-    photo: string
-    name: string
+    photo: string | null
+    name: string | null
     id: number
 }
-
 
 export const FriendIcon = (props: FriendIconPropsType) => {
 

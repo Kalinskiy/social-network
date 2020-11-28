@@ -6,14 +6,14 @@ import {
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStoreType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
 
 type mapDispatchToPropsType = sendMessageCreatorType | updateNewMessageBodyCreatorType
 
-let mapStateToProps = (state: AppStoreType) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         dialogsPage: state.dialogsPage,
     }

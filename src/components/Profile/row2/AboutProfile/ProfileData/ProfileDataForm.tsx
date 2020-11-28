@@ -1,4 +1,4 @@
-import {AppStoreType} from "../../../../../redux/redux-store";
+import {AppStateType} from "../../../../../redux/redux-store";
 import {ProfileType} from "../../../row1/Avatar/Avatar";
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
@@ -18,9 +18,9 @@ export const ProfileDataForm = (props: any) => {
     const dispatch = useDispatch()
 
     // @ts-ignore
-    const {github, twitter, facebook, instagram, mainLink} = useSelector<AppStoreType>(state => state.profilePage.profile.contacts)
+    const {github, twitter, facebook, instagram, mainLink} = useSelector<AppStateType>(state => state.profilePage.profile.contacts)
 // @ts-ignore
-    const {fullName, aboutMe, lookingForAJobDescription, lookingForAJob} = useSelector<AppStoreType, any>(state => state.profilePage.profile)
+    const {fullName, aboutMe, lookingForAJobDescription, lookingForAJob} = useSelector<AppStateType, any>(state => state.profilePage.profile)
 
     const formik = useFormik({
         enableReinitialize: true,

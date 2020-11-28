@@ -18,7 +18,7 @@ export type UsersTypeProps = {
 
 }
 
-let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}: UsersTypeProps) => {
+let Users: React.FC<UsersTypeProps> = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}) => {
     return <div className={style.container}>
 
         {
@@ -27,6 +27,7 @@ let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...p
                                         followingInProgress={props.followingInProgress}
                                         unfollow={props.unfollow}
                                         follow={props.follow}
+
                 />
             )}
     </div>

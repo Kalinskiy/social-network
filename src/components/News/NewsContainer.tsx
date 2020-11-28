@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {AppStoreType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 import News from "./News";
@@ -26,7 +26,7 @@ class NewsContainer extends React.Component<any> {
     }
 }
 
-const mapStateToProps = (state: AppStoreType) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
         news: state.news.news,
         isFetching: state.app.isFetching
