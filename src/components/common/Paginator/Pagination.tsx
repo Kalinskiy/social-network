@@ -20,14 +20,14 @@ let Pagination: React.FC<PropsType> = ({
                                            portionSize = 10
                                        }) => {
 
-    let pagesCount = Math.ceil(totalItemsCount / pageSize) / 50;
-    // let pagesCount = 30
+    const [portionNumber, setPortionNumber] = useState(1)
+
+    let pagesCount = Math.ceil(totalItemsCount / pageSize) ;
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
     const portionCount = Math.ceil(pagesCount / portionSize)
-    const [portionNumber, setPortionNumber] = useState(1)
     const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     const rightPortionPageNumber = portionNumber * portionSize
     return <div className={cn(s.paginator)}>

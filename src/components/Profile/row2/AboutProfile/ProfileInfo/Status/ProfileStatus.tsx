@@ -1,7 +1,17 @@
 import React from "react";
 
 
-class ProfileStatus extends React.Component<any, any> {
+type PropsType = {
+    status: string
+    updateStatus: (newStatus: string) => void
+
+}
+type StateType = {
+    editMode: boolean
+    status: string
+}
+
+class ProfileStatus extends React.Component<PropsType, StateType> {
 
     state = {
         editMode: false,
@@ -23,18 +33,14 @@ class ProfileStatus extends React.Component<any, any> {
                 status: e.currentTarget.value
             }
         )
-
     }
 
-    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
-        if(prevProps !== this.props){
+    componentDidUpdate(prevProps: PropsType, prevState: StateType): void {
+        if (prevProps !== this.props) {
             this.setState({
                 status: this.props.status
             })
         }
-
-
-        console.log("componentDidUpdate")
     }
 
     render() {
@@ -43,7 +49,7 @@ class ProfileStatus extends React.Component<any, any> {
         return <>
             {!this.state.editMode &&
             <div>
-                <span onDoubleClick={this.activateEditMode}> status: {this.props.status ||  "---"}</span>
+                <span onDoubleClick={this.activateEditMode}> status: {this.props.status || "---"}</span>
             </div>
             }
             {this.state.editMode &&

@@ -19,7 +19,7 @@ test("length of posts should be incremented", () => {
    expect(newState.posts.length).toBe(4)
 
 });
-test("message of new post should be "example test" ", () => {
+test("message of new post should be example test", () => {
     // 1. start test data
     let action:any = addPostAC("example test")
 
@@ -29,7 +29,7 @@ test("message of new post should be "example test" ", () => {
 
    expect(newState.posts[3].message).toBe("example test")
 });
-test("after removing length of message should be decremented" ", () => {
+test("after removing length of message should be decremented", () => {
     // 1. start test data
     let action:any = deletePostAC(1)
 

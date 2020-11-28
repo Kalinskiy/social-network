@@ -1,5 +1,7 @@
 import {newsAPI} from "../api/api";
-import {toggleIsFetchingAC} from "./app-reducer";
+import {toggleIsFetchingAC, ToggleIsFetchingType} from "./app-reducer";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const initialState = {
     news: Array<NewType>() //?
@@ -29,7 +31,8 @@ type NewType = {
 }
 
 type InitialStateType = typeof initialState
-
+type ActionType = SetNewsActionType | ToggleIsFetchingType
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 
 export const newsReducer = (state: InitialStateType = initialState, action: SetNewsActionType) => {
     switch (action.type) {
@@ -44,16 +47,15 @@ export const newsReducer = (state: InitialStateType = initialState, action: SetN
 }
 
 
-export const setNewsAC = (news: Array<any>):SetNewsActionType => ({type: SET_NEWS, payload: {news}});
+export const setNewsAC = (news: Array<any>): SetNewsActionType => ({type: SET_NEWS, payload: {news}});
 
-export const getNews = () => {
-    return async (dispatch: any) => {
-        dispatch(toggleIsFetchingAC(true));
-        const data = await newsAPI.getnews()
-        console.log(data)
-        dispatch(setNewsAC(data.data.articles));
-        dispatch(toggleIsFetchingAC(false));
-    }
+export const getNews = (): ThunkType => async (dispatch) => {
+    dispatch(toggleIsFetchingAC(true));
+    const data = await newsAPI.getnews()
+    console.log(data)
+    dispatch(setNewsAC(data.data.articles));
+    dispatch(toggleIsFetchingAC(false));
+
 }
 
 

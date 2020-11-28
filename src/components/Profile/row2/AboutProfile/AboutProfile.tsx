@@ -4,7 +4,8 @@ import ProfileStatusWithHooks from "./ProfileInfo/Status/ProfileStatusWithHooks"
 import {updateStatus} from "../../../../redux/profile-reducer";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataForm} from "./ProfileData/ProfileDataForm";
-import {ProfileType} from "../../row1/Avatar/Avatar";
+import {ProfileType} from "../../../../types/types";
+
 
 type AboutProfileType = {
     fullName:string

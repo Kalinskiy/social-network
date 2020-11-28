@@ -1,6 +1,8 @@
 import {usersAPI} from "../api/api";
 import {PhotosType} from "../types/types";
 import {Dispatch} from "react";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const initialState = {
     friends: [] as UsersType[],
@@ -34,6 +36,7 @@ type SetOnlineFriendsType = {
     }
 }
 type ActionTypes = SetFriendsType | SetOnlineFriendsType
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionTypes>
 //----------------------------------------------------------------------------------------------------------------------
 //Reducer
 export const friendsReducer = (state: InitialStateType = initialState, action: ActionTypes) => {
@@ -51,15 +54,15 @@ export const friendsReducer = (state: InitialStateType = initialState, action: A
 
 //----------------------------------------------------------------------------------------------------------------------
 //Actions
-export const setFriendsAC = (value: UsersType[]): SetFriendsType => ({type: SET_FRIENDS, payload: {value} as const})
-export const setOnlineFriendsAC = (value: UsersType[]): SetOnlineFriendsType => ({
+export const setFriendsAC = (value: Array<UsersType>): SetFriendsType => ({type: SET_FRIENDS, payload: {value} as const})
+export const setOnlineFriendsAC = (value: Array<UsersType>): SetOnlineFriendsType => ({
     type: SET_ONLINE_FRIENDS,
     payload: {value} as const
 })
 
 //----------------------------------------------------------------------------------------------------------------------
 //Thunks
-export const getFriends = () => async (dispatch: Dispatch<any>) => {
+export const getFriends = ():ThunkType => async (dispatch) => {
     try {
         const friends = await usersAPI.getFriends()
         const onlineFriends = await usersAPI.getOnlineFriends()

@@ -16,8 +16,6 @@ type FormDataType = {
 
 
 const LoginForm = ({handleSubmit, error, captchaUrl}: any) => {
-
-
     useEffect(() => {
     }, [])
 

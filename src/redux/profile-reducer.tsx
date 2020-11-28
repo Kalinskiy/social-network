@@ -2,9 +2,10 @@ import {newPostType} from './store';
 import {IPost} from '../components/Profile/row2/MyPosts/MyPosts';
 import {profileAPI, usersAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
-import {toggleIsFetchingAC} from './app-reducer';
-import {Dispatch} from 'redux';
+import {toggleIsFetchingAC, ToggleIsFetchingType} from './app-reducer';
 import {PostType, ProfileType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
 const ADD_POST = 'ADD-POST';
 const DELETE_POST = 'DELETE_POST';
@@ -110,6 +111,9 @@ export type ActionType =
     | SetStatusType
     | DeletePostType
     | SetPhotoType
+    | ToggleIsFetchingType
+
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
 
 //----------------------------------------------------------------------------------------------------------------------
 //Reducer
@@ -172,20 +176,20 @@ export const setStatusAC = (status: string): SetStatusType => ({type: SET_STATUS
 export const setPhotoSuccessAC = (photos: string): SetPhotoType => ({type: SAVE_PHOTO_SUCCESS, photos});
 //----------------------------------------------------------------------------------------------------------------------
 //Thunks
-export const getUserProfile = (userId: any) => async (dispatch: Dispatch) => {
+export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     const response = await usersAPI.getProfile(userId);
     dispatch(toggleIsFetchingAC(false));
     dispatch(setUserProfileAC(response.data));
 }
-export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     const response = await profileAPI.getStatus(userId)
     dispatch(toggleIsFetchingAC(false));
     dispatch(setStatusAC(response.data));
 
 }
-export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     const response = await profileAPI.updateStatus(status)
     dispatch(toggleIsFetchingAC(false));
@@ -193,7 +197,7 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
         dispatch(setStatusAC(status));
     }
 }
-export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
+export const savePhoto = (file: any): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     const response = await profileAPI.savePhoto(file)
     dispatch(toggleIsFetchingAC(false));
@@ -207,7 +211,14 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
 
     }
 }
-export const saveProfile = (profile: any) => async (dispatch: any, getState: any) => {
+export const saveProfile = (profile: {
+    lookingForAJobDescription: any;
+    lookingForAJob: any; AboutMe: any; FullName: any;
+    contacts: {
+        twitter: any; gitHub: any; facebook: any;
+        instagram: any; linkedIn: any
+    }
+}) => async (dispatch: any, getState: any) => {
     dispatch(toggleIsFetchingAC(true));
     const userId = getState().auth.userId;
     const response = await profileAPI.saveProfile(profile)

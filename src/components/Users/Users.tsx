@@ -12,7 +12,6 @@ export type UsersTypeProps = {
     follow: (userId: number) => void,
     unfollow: (userId: number) => void
     totalUsersCount: number,
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<number>
 
 
