@@ -51,9 +51,8 @@ export const setNewsAC = (news: Array<any>): SetNewsActionType => ({type: SET_NE
 
 export const getNews = (): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
-    const data = await newsAPI.getnews()
-    console.log(data)
-    dispatch(setNewsAC(data.data.articles));
+    const data = await newsAPI.getNews()
+    dispatch(setNewsAC(data.articles));
     dispatch(toggleIsFetchingAC(false));
 
 }

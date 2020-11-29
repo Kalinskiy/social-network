@@ -2,9 +2,10 @@ import React, {useEffect} from "react";
 import style from "./Friends.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../../redux/redux-store";
-import {getFriends, UsersType} from "../../../../redux/friends-reducer";
+import {getFriends} from "../../../../redux/friends-reducer";
 import userPhoto from "../../../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
+import {UsersType} from "../../../../types/types";
 
 
 export const Friends = () => {
@@ -28,7 +29,8 @@ export const Friends = () => {
         <FriendIcon
             name={element.name}
             photo={element.photos.small}
-            id={element.id} key={element.id}
+            id={element.id}
+            key={element.id}
         />)
 
     return (

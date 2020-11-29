@@ -36,3 +36,11 @@ export type UserType = {
     status: string
     id: number
 }
+export type UsersType = {
+    followed: boolean
+    id: number
+    name: string
+    photos: PhotosType
+    status: string
+    uniqueUrlName: string
+}

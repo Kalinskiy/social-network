@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {PhotosType, ProfileType, UsersType} from "../types/types";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -18,28 +19,34 @@ const instanceNews = axios.create({
 });
 
 
+type UsersResponseType = {
+    error: null
+    items: Array<UsersType>
+    totalCount: number
+}
+
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
+        return instance.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`).then(res => res.data)
     },
     follow(userId: number) {
-        return instance.post(`follow/${userId}`)
+        return instance.post(`follow/${userId}`).then(res => res.data)
     },
     unfollow(userId: number) {
-        return instance.delete(`follow/${userId}`)
+        return instance.delete(`follow/${userId}`).then(res => res.data)
     },
     getProfile(userId: number) {
         console.log('Obsolete method. Please use  profileAPI')
-        return profileAPI.getProfile(userId)
+        return profileAPI.getProfile(userId).then(res=>res.data)
     },
     getFriends(pageSize = 6) {
-        return instance.get(`users?count=${pageSize}`)
+        return instance.get<UsersResponseType>(`users?count=${pageSize}`)
             .then(response => {
                 return response.data.items
             })
     },
     getOnlineFriends(pageSize = 4) {
-        return instance.get(`users?count=${pageSize}`)
+        return instance.get<UsersResponseType>(`users?count=${pageSize}`)
             .then(response => {
                 return response.data.items
             })
@@ -49,10 +56,10 @@ export const usersAPI = {
 }
 export const profileAPI = {
     getProfile(userId: number) {
-        return instance.get(`profile/${userId}`);
+        return instance.get<ProfileType>(`profile/${userId}`)
     },
     getStatus(userId: number) {
-        return instance.get(`profile/status/${userId}`);
+        return instance.get<string>(`profile/status/${userId}`).then(res=>res.data)
     },
     updateStatus(status: string) {
         return instance.put(`profile/status`, {status: status});
@@ -71,16 +78,46 @@ export const profileAPI = {
     }
 }
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
 
+}
+
+export enum ResultCodeForCaptcha {
+    CaptchaIsRequired = 10,
+}
+
+type MeResponseType = {
+    data: { id: number, email: string, login: string }
+    resultCode: number
+    messages: Array<string>
+}
+type LoginResponseType = {
+    data: { userId: number }
+    resultCode: ResultCodesEnum | ResultCodeForCaptcha
+    messages: Array<string>
+}
+type LogoutResponseType = {
+    data: {}
+    resultCode: ResultCodesEnum | ResultCodeForCaptcha
+    messages: Array<string>
+}
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`);
+        return instance.get<MeResponseType>(`auth/me`).then(res => res.data)
     },
-    login(email: string, password: string, rememberMe: boolean = false, captcha = null) {
-        return instance.post(`auth/login`, {email, password, rememberMe, captcha});
+    login(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
+        return instance.post<LoginResponseType>(`auth/login`, {
+            email,
+            password,
+            rememberMe,
+            captcha
+        }).then(res => res.data)
     },
     logout() {
-        return instance.delete(`auth/login`);
+
+        return instance.delete<LogoutResponseType>(`auth/login`).then(res => res.data)
     },
 }
 
@@ -89,10 +126,25 @@ export const securityAPI = {
         return instance.get(`/security/get-captcha-url`)
     },
 }
-export const newsAPI = {
 
-    getnews() {
-        return instanceNews.get('')
+type NewItemType = {
+    author: string
+    content: string
+    description: string
+    publishedAt: string
+    source: { id: string, name: string }
+    title: string
+    url: string
+    urlToImage: string
+}
+type NewsResponseType = {
+    articles: Array<NewItemType>
+    status: string
+    totalResults: number
+}
+export const newsAPI = {
+    getNews() {
+        return instanceNews.get<NewsResponseType>('').then(res => res.data)
     }
 }
 

@@ -1,6 +1,6 @@
 import {newPostType} from './store';
 import {IPost} from '../components/Profile/row2/MyPosts/MyPosts';
-import {profileAPI, usersAPI} from '../api/api';
+import {profileAPI, ResultCodesEnum, usersAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
 import {toggleIsFetchingAC, ToggleIsFetchingType} from './app-reducer';
 import {PostType, ProfileType} from "../types/types";
@@ -180,20 +180,20 @@ export const getUserProfile = (userId: number): ThunkType => async (dispatch) =>
     dispatch(toggleIsFetchingAC(true));
     const response = await usersAPI.getProfile(userId);
     dispatch(toggleIsFetchingAC(false));
-    dispatch(setUserProfileAC(response.data));
+    dispatch(setUserProfileAC(response));
 }
 export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     const response = await profileAPI.getStatus(userId)
     dispatch(toggleIsFetchingAC(false));
-    dispatch(setStatusAC(response.data));
+    dispatch(setStatusAC(response));
 
 }
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     const response = await profileAPI.updateStatus(status)
     dispatch(toggleIsFetchingAC(false));
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(setStatusAC(status));
     }
 }
@@ -203,7 +203,7 @@ export const savePhoto = (file: any): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetchingAC(false));
     try {
 
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodesEnum.Success) {
             dispatch(setPhotoSuccessAC(response.data.data.photos));
         }
     } catch {
@@ -223,7 +223,7 @@ export const saveProfile = (profile: {
     const userId = getState().auth.userId;
     const response = await profileAPI.saveProfile(profile)
     dispatch(toggleIsFetchingAC(false));
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(getUserProfile(userId));
     } else {
         dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))

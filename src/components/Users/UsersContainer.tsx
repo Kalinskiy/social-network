@@ -13,7 +13,8 @@ import {
 } from "../../redux/users-selectors";
 import Pagination from "../common/Paginator/Pagination";
 import Users from "./Users";
-import {UserType} from "../../types/types";
+import {UsersType} from "../../types/types";
+
 
 
 // type PropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -29,7 +30,7 @@ type MapStateToPropsType =  {
     pageSize: number
     isFetching: boolean
     totalUsersCount: number
-    users: Array<UserType>
+    users: Array<UsersType>
     followingInProgress: Array<number>
 }
 

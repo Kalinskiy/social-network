@@ -7,14 +7,14 @@ import {AboutProfile} from './row2/AboutProfile/AboutProfile';
 import {ProfileType} from "../../types/types";
 
 
- type PropsType = {
-
+type PropsType = {
+    updateStatus: (status: string) => void
     profile: ProfileType
     status: string
-    updateStatus: string
     isOwner: any
     savePhoto: (file: File) => void
     saveProfile: (profile: ProfileType) => void
+
 }
 
 function Profile(props: PropsType) {
@@ -31,6 +31,7 @@ function Profile(props: PropsType) {
             </div>
             <div className={s.row2}>
                 <AboutProfile
+                    updateStatus={props.updateStatus}
                     fullName={props.profile.fullName}
                     isOwner={props.isOwner}
                     saveProfile={props.saveProfile}

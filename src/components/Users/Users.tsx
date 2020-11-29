@@ -1,14 +1,15 @@
 import React from "react";
 import style from "./Users.module.css"
-import {UserType} from "../../types/types";
+import {UsersType} from "../../types/types";
 import User from "./User/User";
+
 
 
 export type UsersTypeProps = {
     pageSize: number,
     currentPage: number,
     onPageChanged: (pageNumber: number) => void
-    users: Array<UserType>,
+    users: Array<UsersType>,
     follow: (userId: number) => void,
     unfollow: (userId: number) => void
     totalUsersCount: number,
@@ -26,6 +27,7 @@ let Users: React.FC<UsersTypeProps> = ({currentPage, onPageChanged, totalUsersCo
                                         followingInProgress={props.followingInProgress}
                                         unfollow={props.unfollow}
                                         follow={props.follow}
+
 
                 />
             )}

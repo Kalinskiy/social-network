@@ -1,4 +1,4 @@
-import {authAPI, securityAPI} from '../api/api';
+import {authAPI, ResultCodeForCaptcha, ResultCodesEnum, securityAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
 import {Dispatch} from 'redux';
 import {ThunkAction} from "redux-thunk";
@@ -71,21 +71,21 @@ export const getCaptchaUrlSuccessAC = (captchaUrl: any): GetCaptchaType => ({
 //Thunks
 export const getAuthUserData = ():ThunkType => async (dispatch) => {
     const response = await authAPI.me()
-    if (response.data.resultCode === 0) {
-        let {email, id, login} = response.data.data;
+    if (response.resultCode === ResultCodesEnum.Success) {
+        let {email, id, login} = response.data;
         dispatch(setAuthUserDataAC(id, email, login, true));
     }
 }
-export const login = (email: string, password: string, rememberMe: boolean, captcha: any) => async (dispatch:Dispatch<any>) => {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch:Dispatch<any>) => {
     const response = await authAPI.login(email, password, rememberMe, captcha)
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData())
     } else {
-        if (response.data.resultCode === 10) {
+        if (response.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
             dispatch(getCaptchaUrl())
         }
-        let message = response.data.messages.length > 0
-            ? response.data.messages[0]
+        let message = response.messages.length > 0
+            ? response.messages[0]
             : 'email or password is not valid'
 
         dispatch(stopSubmit('login', {_error: message})) // dispatch AC which comes from redux-form library
@@ -105,7 +105,7 @@ export const getCaptchaUrl = ():ThunkType => async (dispatch) => {
 
 export const logout = ():ThunkType => async (dispatch) => {
     const response = await authAPI.logout()
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserDataAC(null, null, null, false))
     }
 }
