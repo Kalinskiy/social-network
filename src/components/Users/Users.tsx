@@ -2,13 +2,15 @@ import React from "react";
 import style from "./Users.module.css"
 import {UsersType} from "../../types/types";
 import User from "./User/User";
+import {UsersSearchForm} from "./UsersSearchForm";
+import {FilterType} from "../../redux/users-reducer";
 
 
-
- type UsersTypeProps = {
+type UsersTypeProps = {
     pageSize: number,
     currentPage: number,
     onPageChanged: (pageNumber: number) => void
+    onFilterChanged: (filter: FilterType) => void
     users: Array<UsersType>,
     follow: (userId: number) => void,
     unfollow: (userId: number) => void
@@ -20,6 +22,7 @@ import User from "./User/User";
 
 let Users: React.FC<UsersTypeProps> = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}) => {
     return <div className={style.container}>
+        <UsersSearchForm  onFilterChanged={props.onFilterChanged}/>
 
         {
             users.map((u: any) => <User user={u}

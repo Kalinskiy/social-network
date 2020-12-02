@@ -8,12 +8,17 @@ import {usersAPI} from "../api/users-api";
 
 
 const initialState = {
-    users: [],
+    users: [] as UsersType[],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
+    filter:{
+        term:'',
+        friend:null as null | boolean
+    },
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: []//Array of users id
+
 }
 //----------------------------------------------------------------------------------------------------------------------
 //Types
@@ -22,10 +27,14 @@ type InitialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    filter:{
+        term:string,
+        friend:null | boolean
+    }
     isFetching: boolean
-    followingInProgress: Array<number> //Array of users id
+    followingInProgress: Array<number>
 }
-
+export type FilterType = typeof initialState.filter
 
 type ActionType = InferActionsTypes<typeof actions & typeof appAction>
 
@@ -53,6 +62,9 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionType
         case 'SET_CURRENT_PAGE': {
             return {...state, currentPage: action.payload.currentPage}
         }
+        case 'SET_FILTER': {
+            return {...state, filter: action.payload.filter}
+        }
         case 'SET_TOTAL_USERS_COUNT': {
             return {...state, totalUsersCount: action.payload.count}
         }
@@ -76,6 +88,7 @@ export const actions = {
     unfollowSuccess: (userId: number) => ({type: 'UNFOLLOW', payload: {userId}} as const),
     setUsers: (users: Array<UsersType>) => ({type: 'SET_USERS', payload: {users}} as const),
     setCurrentPage: (currentPage: number) => ({type: 'SET_CURRENT_PAGE', payload: {currentPage}} as const),
+    setFilter: (filter: FilterType) => ({type: 'SET_FILTER', payload: {filter}} as const),
     setTotalUsersCount: (totalUsersCount: number) => ({
         type: 'SET_TOTAL_USERS_COUNT',
         payload: {count: totalUsersCount}
@@ -88,10 +101,11 @@ export const actions = {
 
 //----------------------------------------------------------------------------------------------------------------------
 //Thunks
-export const requestUsers = (page: number, pageSize: number): ThunkType => async (dispatch) => {
+export const requestUsers = (page: number, pageSize: number, filter:FilterType): ThunkType => async (dispatch) => {
     dispatch(appAction.toggleIsFetchingAC(true));
     dispatch(actions.setCurrentPage(page));
-    const data = await usersAPI.getUsers(page, pageSize)
+    dispatch(actions.setFilter(filter));
+    const data = await usersAPI.getUsers(page, pageSize,filter.term, filter.friend)
     dispatch(appAction.toggleIsFetchingAC(false))
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalUsersCount(data.totalCount))
