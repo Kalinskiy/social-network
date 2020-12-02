@@ -6,13 +6,9 @@ import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import Preloader from "../common/Preloader/Preloader";
+import {AppStateType} from "../../redux/redux-store";
 
 
-type PropsType = {
-    // profilePage: ProfileType
-    //  dispatch:any
-    store: any
-}
 
 
 class ProfileContainer extends React.Component<any> {
@@ -43,7 +39,7 @@ class ProfileContainer extends React.Component<any> {
         return (
             <>
                 {this.props.isFetching ? <Preloader/> :
-                    < Profile
+                    this.props.profile  && < Profile
                         isOwner={!this.props.match.params.userId}
                         {...this.props}
                         profile={this.props.profile}
@@ -60,7 +56,7 @@ class ProfileContainer extends React.Component<any> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.auth.userId,

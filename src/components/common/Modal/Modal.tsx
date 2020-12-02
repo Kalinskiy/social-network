@@ -1,12 +1,12 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, ReactChildren} from "react";
 import style from "./Modal.module.scss"
 
 type ModalAddPackType = {
     modalActive: boolean
     setModalActive: (active: boolean) => void
-    children: any
-    onCancel: any
-    onClick: any
+    children: ReactChildren
+    onCancel: ()=>void
+    onClick: ()=>void
     value: string
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
     withoutInput?: boolean
@@ -15,16 +15,16 @@ type ModalAddPackType = {
 type ModalCardType = {
     modalActive: boolean
     setModalActive: (active: boolean) => void
-    children: any
-    onCancel: any
-    onClick: any
+    children: ReactChildren
+    onCancel: ()=>void
+    onClick: ()=>void
 }
 
 type ModalWithChildrenType = {
     modalActive: boolean
     setModalActive: (active: boolean) => void
-    children: any
-    onCancel: any
+    children: ReactChildren
+    onCancel: ()=>void
 }
 
 export const ModalInput = (props: ModalAddPackType) => {

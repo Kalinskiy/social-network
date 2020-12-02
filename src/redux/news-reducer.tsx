@@ -1,20 +1,13 @@
-import {newsAPI} from "../api/api";
-import {toggleIsFetchingAC, ToggleIsFetchingType} from "./app-reducer";
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./redux-store";
+import {BaseThunkType, InferActionsTypes} from "./redux-store";
+import {actions as appAction} from "./app-reducer";
+import {newsAPI} from "../api/news-api";
+
 
 const initialState = {
     news: Array<NewType>() //?
 }
 //----------------------------------------------------------------------------------------------------------------------
 //Types
-const SET_NEWS = "SET_NEWS";
-type SetNewsActionType = {
-    type: typeof SET_NEWS
-    payload: {
-        news: Array<NewType>
-    }
-}
 type NewSourceType = {
     id: string
     name: string
@@ -31,12 +24,12 @@ type NewType = {
 }
 
 type InitialStateType = typeof initialState
-type ActionType = SetNewsActionType | ToggleIsFetchingType
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionType>
+type ActionType = InferActionsTypes<typeof actions & typeof appAction>
+type ThunkType = BaseThunkType<ActionType>
 
-export const newsReducer = (state: InitialStateType = initialState, action: SetNewsActionType) => {
+export const newsReducer = (state: InitialStateType = initialState, action: ActionType) => {
     switch (action.type) {
-        case SET_NEWS:
+        case 'SET_NEWS':
             return {
                 ...state,
                 news: action.payload.news
@@ -47,13 +40,15 @@ export const newsReducer = (state: InitialStateType = initialState, action: SetN
 }
 
 
-export const setNewsAC = (news: Array<any>): SetNewsActionType => ({type: SET_NEWS, payload: {news}});
+const actions = {
+    setNewsAC: (news: Array<any>) => ({type: 'SET_NEWS', payload: {news}} as const)
+}
 
 export const getNews = (): ThunkType => async (dispatch) => {
-    dispatch(toggleIsFetchingAC(true));
+    dispatch(appAction.toggleIsFetchingAC(true));
     const data = await newsAPI.getNews()
-    dispatch(setNewsAC(data.articles));
-    dispatch(toggleIsFetchingAC(false));
+    dispatch(actions.setNewsAC(data.articles));
+    dispatch(appAction.toggleIsFetchingAC(false));
 
 }
 

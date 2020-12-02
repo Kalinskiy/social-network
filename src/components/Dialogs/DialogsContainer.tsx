@@ -1,9 +1,5 @@
-import React, {Dispatch} from "react";
-import {
-    sendMessageCreatorAC,
-    sendMessageCreatorType,
-    updateNewMessageBodyCreatorType
-} from "../../redux/dialogs-reducer";
+import React from "react";
+import {actions} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
@@ -11,27 +7,15 @@ import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
 
-type mapDispatchToPropsType = sendMessageCreatorType | updateNewMessageBodyCreatorType
-
 let mapStateToProps = (state: AppStateType) => {
     return {
         dialogsPage: state.dialogsPage,
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch<mapDispatchToPropsType>) => {
-    return {
-        sendMessage: (newMessageBody: string) => {
-            dispatch(sendMessageCreatorAC(newMessageBody));
-        },
-
-
-    }
-}
-
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(mapStateToProps, {...actions}),
     WithAuthRedirect
 )(Dialogs);
 

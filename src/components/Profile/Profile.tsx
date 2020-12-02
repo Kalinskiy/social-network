@@ -11,13 +11,13 @@ type PropsType = {
     updateStatus: (status: string) => void
     profile: ProfileType
     status: string
-    isOwner: any
+    isOwner: boolean
     savePhoto: (file: File) => void
     saveProfile: (profile: ProfileType) => void
 
 }
 
-function Profile(props: PropsType) {
+const Profile:React.FC<PropsType> = (props) =>{
 
     return (
         <div className={s.container}>

@@ -16,16 +16,7 @@ import Users from "./Users";
 import {UsersType} from "../../types/types";
 
 
-
-// type PropsType = MapStateToPropsType & MapDispatchToPropsType
-// type MapDispatchToPropsType = {
-//     follow: (userId:number) => void
-//     unfollow: (userId:number) => void
-//     requestUsers: (currentPage: number, pageSize: number) => void
-//     // toggleIsFetching: (isFetching: boolean) => void
-//     // toggleFollowingProgress: (isFetching: boolean) => void
-// }
-type MapStateToPropsType =  {
+type MapStateToPropsType = {
     currentPage: number
     pageSize: number
     isFetching: boolean
@@ -33,8 +24,6 @@ type MapStateToPropsType =  {
     users: Array<UsersType>
     followingInProgress: Array<number>
 }
-
-
 
 class UsersContainer extends React.Component<PropsType> {
 
@@ -68,15 +57,10 @@ class UsersContainer extends React.Component<PropsType> {
                            unfollow={this.props.unfollow}
                            followingInProgress={this.props.followingInProgress}
                     />
-
-
                 </>
             }
-
         </>
-
     }
-
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {

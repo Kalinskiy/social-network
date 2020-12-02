@@ -2,11 +2,20 @@ import React, {useEffect} from "react";
 import s from "./Header.module.css";
 import {NavLink} from "react-router-dom";
 import logo from "../../assets/icons/logo.png"
-import {useSelector} from "react-redux";
 
-const Header = (props: any) => {
-    // @ts-ignore
-    const isAuth = useSelector(state => state.auth.isAuth)
+export type MapPropsType = {
+    isAuth: boolean
+    login: string | null
+    userId:number | null
+    email:string | null
+}
+export type DispatchPropsType = {
+    logout: () => void
+}
+
+const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
+
+
     useEffect(() => {
 
     }, [props.logout])
@@ -19,7 +28,6 @@ const Header = (props: any) => {
                 <NavLink to={"/profile"}>
                     <img src={logo}/>
                 </NavLink>
-                {/*{isAuth && <Redirect to={"/login"}/>}*/}
             </div>
             <div className={s.loginBlock}>
                 {props.isAuth ? <div>

@@ -6,19 +6,19 @@ import facebookImg from "../../../../../assets/icons/contacts/facebook.png"
 import instagramImg from "../../../../../assets/icons/contacts/instagram.png"
 import githubImg from "../../../../../assets/icons/contacts/github.png"
 import youtubeImg from "../../../../../assets/icons/contacts/youtube.png"
+import {ProfileType} from "../../../../../types/types";
 
 
 type ProfileDataPropsType = {
-    profile: any
+    profile: ProfileType
     isOwner: boolean
     goToEditMode: () => void
 }
 
-export const ProfileData: React.FC<ProfileDataPropsType> = (props: ProfileDataPropsType) => {
+export const ProfileData: React.FC<ProfileDataPropsType> = (props) => {
 
 
     const [isBlockOpen, setIsBlockOpen] = useState(true)
-
     const fetchFullInformation = () => {
         setIsBlockOpen(!isBlockOpen)
     }

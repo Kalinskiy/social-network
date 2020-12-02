@@ -5,7 +5,7 @@ import User from "./User/User";
 
 
 
-export type UsersTypeProps = {
+ type UsersTypeProps = {
     pageSize: number,
     currentPage: number,
     onPageChanged: (pageNumber: number) => void

@@ -2,16 +2,17 @@ import React, {ChangeEvent, useRef} from "react";
 import s from "./Avatar.module.css";
 import Preloader from "../../../common/Preloader/Preloader";
 import userPhoto from "../../../../assets/images/user.png"
+import {ProfileType} from "../../../../types/types";
 
 
 
 type PropsType = {
-    profile: any
+    profile: ProfileType
     isOwner: boolean
     savePhoto: (file: File) => void
 
 }
-export const Avatar = (props: PropsType) => {
+export const Avatar:React.FC<PropsType> = (props ) => {
     const inRef = useRef<HTMLInputElement>(null)
 
     if (!props.profile) {

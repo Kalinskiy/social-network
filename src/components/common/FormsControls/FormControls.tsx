@@ -2,6 +2,7 @@ import React from "react"
 import styles from "./FormControls.module.css"
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from "redux-form"
 import {FieldValidatorType} from "../../../utilities/validators/validators"
+import exp from "constants";
 
 type FormControlParamsType = {
     meta: WrappedFieldMetaProps
@@ -56,3 +57,4 @@ export function createField<FormKeysType extends string>(placeholder: string,
         />{text}
     </div>
 }
+export type GetStringKeysType<T> = Extract<keyof T, string>

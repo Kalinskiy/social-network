@@ -14,7 +14,7 @@ type AboutProfileType = {
     status:string
     updateStatus:(status:string)=>void
 }
-export const AboutProfile = (props: AboutProfileType) => {
+export const AboutProfile:React.FC<AboutProfileType> = (props ) => {
     const [editMode, setEditMode] = useState(false)
     const onCancel = ()=>{
         setEditMode(false)

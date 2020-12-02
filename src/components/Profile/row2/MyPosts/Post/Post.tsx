@@ -4,13 +4,24 @@ import {useSelector} from "react-redux";
 import like from "../../../../../assets/icons/like.png"
 import liked from "../../../../../assets/icons/liked.png"
 import userPhoto from "../../../../../assets/images/user.png"
+import {ProfileType} from "../../../../../types/types";
+
+type PropsType = {
+
+    id:number
+    addLike: (id: number) => void
+    message: string
+    likesCount: number
+    profile:ProfileType | null
 
 
-const Post = (props: any) => {
+}
+const Post:React.FC<PropsType> = (props) => {
 
 
-    // @ts-ignore
-    const myPhoto = useSelector(state => state.profilePage.profile.photos.large)
+
+    const myPhoto = props.profile?.photos.large
+
     const [isLike, setIsLike] = useState(false)
     const likeClick = () => {
         setIsLike(!isLike)

@@ -1,12 +1,12 @@
 import React, {Dispatch} from "react";
-import {addLikeAC, addPostAC} from "../../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {reset} from "redux-form";
+import {actions} from "../../../../redux/profile-reducer";
+import {AppStateType} from "../../../../redux/redux-store";
 
 
-let mapStateToProps = (state:any) => {
-
+let mapStateToProps = (state:AppStateType) => {
     return {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
@@ -17,11 +17,11 @@ let mapStateToProps = (state:any) => {
 let mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
         addPost: (newPostText: string) => {
-            dispatch(addPostAC(newPostText));
+            dispatch(actions.addPostAC(newPostText));
            dispatch(reset("profileAddNewPostForm"))
         },
         addLike: (id: number) => {
-            dispatch(addLikeAC(id))
+            dispatch(actions.addLikeAC(id))
         },
 
     }

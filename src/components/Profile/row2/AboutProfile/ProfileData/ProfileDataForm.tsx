@@ -1,7 +1,6 @@
-import {AppStateType} from "../../../../../redux/redux-store";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
-import {saveProfile} from "../../../../../redux/profile-reducer";
+import {saveProfile, UpdateProfileType} from "../../../../../redux/profile-reducer";
 import style from "./ProfileDataForm.module.css"
 import React from "react";
 import {ProfileType} from "../../../../../types/types";
@@ -13,47 +12,49 @@ type PropsType = {
     onCancel: (editMode: boolean) => void
 }
 
-export const ProfileDataForm = (props: any) => {
+export const ProfileDataForm:React.FC<PropsType> = ({profile, onCancel}) => {
 
     const dispatch = useDispatch()
 
-    // @ts-ignore
-    const {github, twitter, facebook, instagram, mainLink} = useSelector<AppStateType>(state => state.profilePage.profile.contacts)
-
-    // @ts-ignore
-    const {fullName, aboutMe, lookingForAJobDescription, lookingForAJob} = useSelector<AppStateType, ProfileType>(state => state.profilePage.profile)
 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            FullName: fullName,
-            AboutMe: aboutMe,
-            lookingForAJobDescription: lookingForAJobDescription,
-            lookingForAJob: lookingForAJob,
-            instagram: instagram,
-            twitter: twitter,
-            linkedIn: mainLink,
-            facebook: facebook,
-            gitHub: github,
+            fullName: profile.fullName,
+            aboutMe: profile.aboutMe,
+            lookingForAJobDescription: profile.lookingForAJobDescription,
+            lookingForAJob: profile.lookingForAJob,
+            github: profile.contacts.github,
+            vk: profile.contacts.vk,
+            facebook: profile.contacts.facebook,
+            instagram: profile.contacts.instagram,
+            twitter: profile.contacts.twitter,
+            website: profile.contacts.website,
+            youtube: profile.contacts.youtube,
+            mainLink: profile.contacts.mainLink,
 
 
         },
         onSubmit: values => {
-            let obj = {
-                FullName: values.FullName,
-                AboutMe: values.AboutMe,
+            let obj: UpdateProfileType = {
+                fullName: values.fullName,
+                aboutMe: values.aboutMe,
                 lookingForAJobDescription: values.lookingForAJobDescription,
                 lookingForAJob: values.lookingForAJob,
                 contacts: {
+                    github: values.github,
+                    vk: values.vk,
+                    facebook: values.facebook,
                     instagram: values.instagram,
                     twitter: values.twitter,
-                    linkedIn: values.linkedIn,
-                    facebook: values.facebook,
-                    gitHub: values.gitHub,
-                }
+                    website: values.youtube,
+                    mainLink: values.mainLink,
+                    youtube: values.youtube
+                },
             }
+
             dispatch(saveProfile(obj))
-            dispatch(props.onCancel)
+            dispatch(onCancel)
         }
     })
 
@@ -61,16 +62,16 @@ export const ProfileDataForm = (props: any) => {
         <form onSubmit={formik.handleSubmit}>
 
             <div className={style.element}>
-                <div className={style.title}>Change you"r name</div>
+                <div className={style.title}>Change you`r name</div>
                 <input className={style.input} type={"text"}
-                       {...formik.getFieldProps("FullName")}
+                       {...formik.getFieldProps("fullName")}
                 />
             </div>
 
             <div className={style.element}>
                 <div className={style.title}>About me</div>
                 <textarea
-                    {...formik.getFieldProps("AboutMe")}
+                    {...formik.getFieldProps("aboutMe")}
                 />
             </div>
 
@@ -119,13 +120,13 @@ export const ProfileDataForm = (props: any) => {
             <div className={style.element}>
                 <div className={style.title}>GitHub</div>
                 <input className={style.input} type={"text"}
-                       {...formik.getFieldProps("gitHub")}
+                       {...formik.getFieldProps("github")}
                 />
             </div>
 
 
             <div className={style.button}>
-                <button >Send</button>
+                <button>Send</button>
             </div>
         </form>
     )

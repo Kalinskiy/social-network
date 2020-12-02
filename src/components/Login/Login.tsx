@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
 import {InjectedFormProps, reduxForm} from "redux-form"
-import {createField, Input} from "../common/FormsControls/FormControls"
+import {createField, GetStringKeysType, Input} from "../common/FormsControls/FormControls"
 import {required} from "../../utilities/validators/validators"
 import {connect} from "react-redux"
 import {login, logout} from "../../redux/auth-reducer"
@@ -55,13 +55,14 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
 }
-export type LoginFormValuesType = {
+type LoginFormValuesType = {
     email: string
     password: string
     rememberMe: boolean
     captcha: string
 }
-type LoginFormValuesTypeKeys = keyof LoginFormValuesType
+
+type LoginFormValuesTypeKeys = GetStringKeysType<LoginFormValuesType>
 
 const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 

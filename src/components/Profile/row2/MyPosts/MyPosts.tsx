@@ -1,23 +1,26 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../../utilities/validators/validators";
-import {TextArea} from "../../../common/FormsControls/FormControls";
+import {createField, GetStringKeysType, Input, TextArea} from "../../../common/FormsControls/FormControls";
+import {ProfileType} from "../../../../types/types";
 
 
 export type IPost = {
     id: number
     message: string
     likesCount: number
+
 }
 
 export type PostsType = {
     addPost: (newPostText: string) => void
     addLike: (id: number) => void
     posts: Array<IPost>
-    newPostText: string
-    profile: any
+    profile:ProfileType | null
+
+
 }
 
 const MyPosts = React.memo((props: PostsType) => {
@@ -30,10 +33,11 @@ const MyPosts = React.memo((props: PostsType) => {
             addLike={props.addLike}
             message={p.message}
             likesCount={p.likesCount}
+            profile={props.profile}
         />)
 
 
-    let onAddPost = (values: any) => {
+    const onAddPost = (values: AddPostFormValuesType) => {
         props.addPost(values.newPostText)
     }
 
@@ -51,21 +55,23 @@ const MyPosts = React.memo((props: PostsType) => {
     )
 })
 
-const maxLength10 = maxLengthCreator(10)
-let AddNewPostForm = (props: any) => {
 
+type AddPostFormType = {}
+
+type AddPostFormValuesType = {
+    newPostText:string
+}
+
+
+type AddPostFormValuesKeysType = GetStringKeysType<AddPostFormValuesType>
+let AddNewPostForm:React.FC<InjectedFormProps<AddPostFormValuesType, AddPostFormType> & AddPostFormType> = (props) => {
 
     return (
         <div className={s.container}>
             <form onSubmit={props.handleSubmit}>
                 <div className={s.formPost}>
-                    <Field component={TextArea}
-                           name={"newPostText"}
-                           placeholder={"What`s new?"}
-                           validate={[required, maxLength10]}
 
-
-                    />
+                    {createField<AddPostFormValuesKeysType>("What`s new?", "newPostText", [required], TextArea)}
 
                     <div className={s.formButton}>
                         <button>Post</button>
@@ -77,7 +83,7 @@ let AddNewPostForm = (props: any) => {
     )
 }
 
-let AddNewPostFormRedux = reduxForm({form: "profileAddNewPostForm"})(AddNewPostForm)
+let AddNewPostFormRedux = reduxForm<AddPostFormValuesType,AddPostFormType >({form: "profileAddNewPostForm"})(AddNewPostForm)
 
 
 export default MyPosts;

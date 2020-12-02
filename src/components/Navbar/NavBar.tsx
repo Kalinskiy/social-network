@@ -9,7 +9,7 @@ import musicIcon from "../../assets/icons/music.png"
 
 
 
-const Navbar = () => {
+const NavBar = () => {
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -40,4 +40,4 @@ const Navbar = () => {
 
     )
 }
-export default Navbar;
+export default NavBar;

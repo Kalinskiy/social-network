@@ -5,6 +5,8 @@ import valerastPhoto from '../assets/dialogs/valerast.jpg'
 import svetaPhoto from '../assets/dialogs/sveta.jpg'
 import artemPhoto from '../assets/dialogs/artem.jpg'
 import ignatPhoto from '../assets/dialogs/ignat.jpg'
+import {InferActionsTypes} from "./redux-store";
+import {actions as appAction} from "./app-reducer";
 
 
 const initialState = {
@@ -38,29 +40,18 @@ export type DialogItemType = {
 export type InitialStateType = {
     dialogs: Array<DialogItemType>,
     messages: Array<MessageType>
-}
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 
-export type sendMessageCreatorType = {
-    type: typeof SEND_MESSAGE
-    payload: {
-        newMessageBody: string
-    }
 }
-export type updateNewMessageBodyCreatorType = {
-    type: typeof UPDATE_NEW_MESSAGE_BODY
-    body: string
-}
-type ActionsType = sendMessageCreatorType | updateNewMessageBodyCreatorType
+export type ActionType = InferActionsTypes<typeof actions & typeof appAction>
+
 
 //----------------------------------------------------------------------------------------------------------------------
 //Reducer
-const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
 
 
     switch (action.type) {
-        case SEND_MESSAGE:
+        case 'SEND_MESSAGE':
             const body = action.payload.newMessageBody;
             return {
                 ...state,
@@ -73,9 +64,12 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionsT
 
 //----------------------------------------------------------------------------------------------------------------------
 //Actions
-export const sendMessageCreatorAC = (newMessageBody: string): sendMessageCreatorType => ({
-    type: SEND_MESSAGE,
-    payload: {newMessageBody}
-});
+export const actions = {
+    sendMessage: (newMessageBody: string) => ({
+        type: 'SEND_MESSAGE',
+        payload: {newMessageBody}
+    } as const)
+}
+
 
 export default dialogsReducer;
