@@ -46,14 +46,14 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                     <NavBar/>
                     <div className="app-wrapper-content">
                         <HashRouter>
-                            <Route exact path={"/social-network/"} render={() => <Redirect to="/profile"/>}/>
-                            <Route path="social-network/profile/:userId?" render={() => <SuspendedProfile/>}/>
-                            <Route path="/social-network/dialogs" render={() => <SuspendedDialogs/>}/>
-                            <Route path="/social-network/users" render={() => <SuspendedUser/>}/>
-                            <Route path="/social-network/news" render={() => <SuspendedNews/>}/>
-                            <Route path="/social-network/music" render={() => <Music/>}/>
-                            <Route path="/social-network/settings" render={() => <Settings/>}/>
-                            <Route path="/social-network/login" render={() => <LoginPage/>}/>
+                            <Route exact path={"/"} render={() => <Redirect to="/profile"/>}/>
+                            <Route path="/:userId?" render={() => <SuspendedProfile/>}/>
+                            <Route path="/dialogs" render={() => <SuspendedDialogs/>}/>
+                            <Route path="/users" render={() => <SuspendedUser/>}/>
+                            <Route path="/news" render={() => <SuspendedNews/>}/>
+                            <Route path="/music" render={() => <Music/>}/>
+                            <Route path="/settings" render={() => <Settings/>}/>
+                            <Route path="/login" render={() => <LoginPage/>}/>
                             <Route exact path="/*" render={() => <div>404 NOT FOUND</div>}/>
                         </HashRouter>
                     </div>
