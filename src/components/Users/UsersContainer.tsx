@@ -49,10 +49,6 @@ class UsersContainer extends React.Component<PropsType> {
         return <>
             {this.props.isFetching ? <Preloader/> :
                 <>
-                    <Pagination pageSize={this.props.pageSize} currentPage={this.props.currentPage}
-                                onPageChanged={this.onPageChanged}
-                                totalItemsCount={this.props.totalUsersCount}/>
-
                     <Users totalUsersCount={this.props.totalUsersCount}
                            pageSize={this.props.pageSize}
                            currentPage={this.props.currentPage}
@@ -63,6 +59,11 @@ class UsersContainer extends React.Component<PropsType> {
                            unfollow={this.props.unfollow}
                            followingInProgress={this.props.followingInProgress}
                     />
+                    {!!this.props.totalUsersCount &&
+                        <Pagination pageSize={this.props.pageSize} currentPage={this.props.currentPage}
+                                    onPageChanged={this.onPageChanged}
+                                    totalItemsCount={this.props.totalUsersCount}/>
+                    }
                 </>
             }
         </>

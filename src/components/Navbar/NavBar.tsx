@@ -14,23 +14,23 @@ const NavBar = () => {
         <nav className={s.nav}>
             <div className={s.item}>
 
-                <NavLink to="/profile" activeClassName={s.activeLink}>  <img src={profileIcon} alt=""/>Profile</NavLink>
+                <NavLink to="/social-network/profile" activeClassName={s.activeLink}>  <img src={profileIcon} alt=""/>Profile</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/users" activeClassName={s.activeLink}> <img src={userIcon} alt=""/>Users</NavLink>
+                <NavLink to="/social-network/users" activeClassName={s.activeLink}> <img src={userIcon} alt=""/>Users</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/news" activeClassName={s.activeLink}> <img src={profileIcon} alt=""/>News</NavLink>
+                <NavLink to="/social-network/news" activeClassName={s.activeLink}> <img src={profileIcon} alt=""/>News</NavLink>
             </div>
             <div className={`${s.item} ${s.active}`}>
-                <NavLink to="/dialogs" activeClassName={s.activeLink}> <img src={messageIcon} alt=""/>Messages</NavLink>
+                <NavLink to="/social-network/dialogs" activeClassName={s.activeLink}> <img src={messageIcon} alt=""/>Messages</NavLink>
             </div>
 
             <div className={s.item}>
-                <NavLink to="/music" activeClassName={s.activeLink}> <img src={musicIcon} alt=""/>Music</NavLink>
+                <NavLink to="/social-network/music" activeClassName={s.activeLink}> <img src={musicIcon} alt=""/>Music</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/settings" activeClassName={s.activeLink}> <img src={settingsIcon} alt=""/>Settings</NavLink>
+                <NavLink to="/social-network/settings" activeClassName={s.activeLink}> <img src={settingsIcon} alt=""/>Settings</NavLink>
             </div>
 
 

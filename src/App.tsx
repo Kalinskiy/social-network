@@ -1,6 +1,6 @@
 import React from "react"
 import "./App.css"
-import {BrowserRouter, Redirect, Route, Switch, withRouter} from "react-router-dom"
+import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom"
 import Music from "./components/Music/Music"
 import Settings from "./components/Settings/Settings"
 import HeaderContainer from "./components/Header/HeaderContainer"
@@ -45,17 +45,17 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                     <HeaderContainer/>
                     <NavBar/>
                     <div className="app-wrapper-content">
-                        <Switch>
-                            <Route exact path={"/"} render={() => <Redirect to="/profile"/>}/>
-                            <Route path="/profile/:userId?" render={() => <SuspendedProfile/>}/>
-                            <Route path="/dialogs" render={() => <SuspendedDialogs/>}/>
-                            <Route path="/users" render={() => <SuspendedUser/>}/>
-                            <Route path="/news" render={() => <SuspendedNews/>}/>
-                            <Route path="/music" render={() => <Music/>}/>
-                            <Route path="/settings" render={() => <Settings/>}/>
-                            <Route path="/login" render={() => <LoginPage/>}/>
-                            <Route exact path="*" render={() => <div>404 NOT FOUND</div>}/>
-                        </Switch>
+                        <HashRouter>
+                            <Route exact path={"/social-network/"} render={() => <Redirect to="/profile"/>}/>
+                            <Route path="social-network/profile/:userId?" render={() => <SuspendedProfile/>}/>
+                            <Route path="/social-network/dialogs" render={() => <SuspendedDialogs/>}/>
+                            <Route path="/social-network/users" render={() => <SuspendedUser/>}/>
+                            <Route path="/social-network/news" render={() => <SuspendedNews/>}/>
+                            <Route path="/social-network/music" render={() => <Music/>}/>
+                            <Route path="/social-network/settings" render={() => <Settings/>}/>
+                            <Route path="/social-network/login" render={() => <LoginPage/>}/>
+                            <Route exact path="/*" render={() => <div>404 NOT FOUND</div>}/>
+                        </HashRouter>
                     </div>
 
                 </div>

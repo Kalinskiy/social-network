@@ -22,7 +22,7 @@ type UsersTypeProps = {
 
 let Users: React.FC<UsersTypeProps> = ({currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props}) => {
     return <div className={style.container}>
-        <UsersSearchForm  onFilterChanged={props.onFilterChanged}/>
+      <div className={style.filterSearch}><UsersSearchForm  onFilterChanged={props.onFilterChanged}/></div>
 
         {
             users.map((u: any) => <User user={u}

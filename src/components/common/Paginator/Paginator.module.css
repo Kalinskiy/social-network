@@ -2,8 +2,8 @@
     display: block;
     margin: 0 auto;
     text-align: center;
-    width: 500px;
-    padding: 10px 0;
+    width: fit-content;
+    padding: 10px 20px;
     border: 1px solid #A9A9A9;
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 18px 1px rgba(0, 0, 0, 0.43);
